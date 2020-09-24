@@ -13,7 +13,7 @@ public class Game {
 
         Job player = new Job(DataInput.playerName,DataInput.playerChoice);
         player.heroChoice();
-        System.out.println(player.getLife());
+        System.out.println("Player life = " + player.getLife());
 
 
 
