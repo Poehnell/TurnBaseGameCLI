@@ -1,21 +1,25 @@
 package Player;
 
+import static Main.DataInput.playerChoice;
+import static Main.DataInput.playerName;
+
 public class Player {
-    protected int life, mana, damage;
+    protected int health, mana, damage;
 
 
-    public Player(int life, int mana, int damage) {
-        this.life = life;
+    public Player(int health, int mana, int damage) {
+        this.health = health;
         this.mana = mana;
         this.damage = damage;
     }
 
-    public int getLife() {
-        return life;
+    public int getHealth() {
+
+        return health;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getMana() {
