@@ -1,5 +1,7 @@
 package Player;
 
+import Main.Combat;
+
 public class Job extends Player {
     protected int vitality = 1, strength = 1, wisdom = 1;
     protected String playerName, playerChoice;
@@ -17,6 +19,7 @@ public class Job extends Player {
         if (playerChoice == "Knight") {
             Knight knight = new Knight();
             baseStatMultiplier(knight.vitality, knight.strength, knight.wisdom);
+
 
 
         } else if (playerChoice == "Mage") {

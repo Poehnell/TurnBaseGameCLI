@@ -9,7 +9,7 @@ public class Dice {
 
     public Dice(int dieSize) {
         this.diceSize = dieSize;
-        this.diceRoll = random.nextInt(diceSize) + 1;
+        this.diceRoll = random.nextInt(diceSize) +1;
 
     }
 
