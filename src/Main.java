@@ -1,6 +1,4 @@
-package Main;
-
-import Player.Job;
+import Main.GameSetup;
 
 
 public class Main {
