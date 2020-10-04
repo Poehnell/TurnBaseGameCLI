@@ -1,7 +1,5 @@
 package Player;
 
-import static Main.DataInput.playerChoice;
-import static Main.DataInput.playerName;
 
 public class Player {
     protected int health, mana, damage;

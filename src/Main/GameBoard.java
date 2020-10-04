@@ -6,21 +6,24 @@ public class GameBoard {
     String enemyName, playerName;
     int enemyHP, enemyMP, playerHP, playerMP;
 
-    public GameBoard(String enemyName, int enemyHP, int enemyMP, String playerName, int playerHP, int playerMP) {
+    public GameBoard(){
+
+    }
+
+    public void drawGameBoard(String enemyName, int enemyHP, int enemyMP, String playerName, int playerHP, int playerMP) {
         this.enemyName = enemyName;
         this.enemyHP = enemyHP;
         this.enemyMP = enemyMP;
         this.playerName = playerName;
         this.playerHP = playerHP;
         this.playerMP = playerMP;
-
         int[][] gameBoard = new int[16][61];
         for (int i = 0; i < gameBoard.length; i++) {
             System.out.print('|');
             for (int k = 0; k < gameBoard[i].length; k++) {
                 if (i == 0 && k < gameBoard[i].length / 2 || i == gameBoard.length - 1 && k < gameBoard[i].length / 2) {
                     System.out.print('-');
-                    //enemy section of game board------------------------------------------
+//enemy section of game board------------------------------------------
                 } else if (i == 1 && k == gameBoard[i].length / 4) {
                     System.out.print('E');
                 } else if (i == 1 && k == gameBoard[i].length / 2 + 6) {
@@ -50,16 +53,6 @@ public class GameBoard {
 
             }
             System.out.println();
-        }
-    }
-
-    public void updateBoard() {
-        try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 }

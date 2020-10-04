@@ -1,7 +1,5 @@
 package Player;
 
-import Main.Combat;
-
 public class Job extends Player {
     protected int vitality = 1, strength = 1, wisdom = 1;
     protected String playerName, playerChoice;

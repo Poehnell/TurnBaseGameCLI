@@ -1,28 +1,34 @@
 package Main;
 
 import Enemys.EnemyManager;
-import Player.Job;
+
 
 import java.util.Scanner;
 
 public class Combat {
-    int dieSize;
-    int playerInCombatDamage;
-    int enemyHealth;
-    String enemyName;
+    int dieSize, playerHP, playerMP, playerInCombatDamage, enemyHealth, enemyMana;
+    String playerName, enemyName;
 
     Scanner scan = new Scanner(System.in);
     EnemyManager newEnemy = new EnemyManager();
+    GameBoard gameBoard = new GameBoard();
+    Screen screen = new Screen();
 
-    public Combat(int dieSize, int playerDamage) {
+
+    public Combat(int dieSize, String playerName, int playerHP, int playerMP, int playerDamage) {
         newEnemy.enemyPicker();
         this.dieSize = dieSize;
-        this.enemyHealth = newEnemy.getHealth();
-        this.enemyName = newEnemy.getEnemyName();
+        this.playerName = playerName;
+        this.playerHP = playerHP;
+        this.playerMP = playerMP;
         this.playerInCombatDamage = playerDamage;
+        this.enemyName = newEnemy.getEnemyName();
+        this.enemyHealth = newEnemy.getHealth();
+        this.enemyMana = newEnemy.getMana();
         System.out.println("\n A " + newEnemy.getEnemyName() + " is attacking!");
         System.out.print("\n    Press Enter!");
         scan.nextLine();
+        screen.updateScreen();
     }
 
 
@@ -39,17 +45,27 @@ public class Combat {
 
     public void battle() {
         if (enemyHealth > 0) {
-            if (combatOptions() == 1) {
+            screen.updateScreen();
+            gameBoard.drawGameBoard(enemyName, enemyHealth, enemyMana, this.playerName, this.playerHP, this.playerHP);
+            int choice = combatOptions();
+            if (choice == 1) {
                 meleeAttack();
                 battle();
-            } else if (combatOptions() == 2) {
-                System.out.println("\n You Have no Items you poor bastard!");
+
+            } else if (choice == 2) {
+                System.out.println("\n     You Have no Items you poor bastard!");
+                screen.nextScreen();
                 battle();
+
             } else
-                System.out.println("Pick a number corresponding to your choice! whatever you entered is not a choice");
+                System.out.println("\n     Pick a number corresponding to your choice! whatever you entered is not a choice");
+            screen.nextScreen();
             battle();
-        } else if (getEnemyHealth() < 0) {
-            System.out.println("Fuck ya bud you just beat up a little " + enemyName);
+        } else if (getEnemyHealth() <= 0) {
+            screen.updateScreen();
+            gameBoard.drawGameBoard(enemyName, enemyHealth, enemyMana, this.playerName, this.playerHP, this.playerHP);
+            System.out.println("\n\n       Fuck ya bud you just beat up the little " + enemyName);
+            screen.nextScreen();
         }
     }
 
@@ -67,23 +83,28 @@ public class Combat {
 
 
     public void meleeAttack() {
-        Dice diceMeleeAttack = new Dice(dieSize);
-        if (diceMeleeAttack.diceRoll > diceMeleeAttack.diceSize - 5) {
-            System.out.println("dice= " + diceMeleeAttack.diceSize);
-            System.out.println("Roll= " + diceMeleeAttack.diceRoll);
-            System.out.println("health was : " + newEnemy.getHealth());
-            this.enemyHealth = this.enemyHealth - this.playerInCombatDamage;
-            System.out.println("health is : " + this.enemyHealth);
-            System.out.println("    YEA BABY! \n    CRITICAL HIT!");
-        } else if (diceMeleeAttack.diceRoll > 1 && diceMeleeAttack.diceRoll < diceMeleeAttack.diceSize - 1) {
-            System.out.println("dice = " + diceMeleeAttack.diceSize);
-            System.out.println("Roll= " + diceMeleeAttack.diceRoll);
-            System.out.println("    Success! ");
+        Dice dice = new Dice(dieSize);
+        int diceRoll = dice.diceRoll;
+        System.out.println("\n    Dice Roll = " + diceRoll);
 
-        } else if (diceMeleeAttack.diceRoll < 2) {
-            System.out.println("Roll= " + diceMeleeAttack.diceRoll);
-            System.out.println("    miss... WTF!");
+        if (diceRoll > dice.diceSize - 1) {
+            this.enemyHealth = this.enemyHealth - this.playerInCombatDamage + 5;
+            System.out.println("    CRITICAL FUCKIN HIT!\n" +
+                    "    The " + enemyName + "took " + (this.playerInCombatDamage + 5) + " damage.");
+            screen.nextScreen();
+
+        } else if (diceRoll > 1 && diceRoll < dice.diceSize - 1) {
+            this.enemyHealth = this.enemyHealth - this.playerInCombatDamage;
+            System.out.println("    Success! \n" +
+                    "    The " + enemyName + "took " + this.playerInCombatDamage + " damage.");
+            screen.nextScreen();
+
+        } else if (diceRoll < 2) {
+            System.out.println("    MISS... WTF!");
+            screen.nextScreen();
+
         }
+
     }
 
     public int getDieSize() {

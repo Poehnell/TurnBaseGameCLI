@@ -17,6 +17,7 @@ public class DataInput {
     Mage startMage = new Mage();
     Scanner scan = new Scanner(System.in);
     Random random = new Random();
+    Screen screen = new Screen();
 
     public DataInput() {
 
@@ -27,13 +28,13 @@ public class DataInput {
         System.out.print(" Choose your Destiny :\n " +
                 "---------------------\n" +
                 "1. Knight \n" +
-                "   Vit =  " + startKnight.getVitality() + " \n" +
+                "   Vit = " + startKnight.getVitality() + " \n" +
                 "   Str = " + startKnight.getStrength() + " \n" +
                 "   Wis = " + startKnight.getWisdom() + " \n" +
                 "\n" +
                 "\n" +
                 "2. Mage \n" +
-                "   Vit =  " + startMage.getVitality() + " \n" +
+                "   Vit = " + startMage.getVitality() + " \n" +
                 "   Str = " + startMage.getStrength() + " \n" +
                 "   Wis = " + startMage.getWisdom() + " \n" +
                 "\n" +
@@ -48,7 +49,27 @@ public class DataInput {
             System.out.println(" \n you have chasen the Mage \n Enter your Name");
         }
         playerName = scan.next();
-        System.out.println("\n Prepare yourself sir " + playerName + " the " + playerChoice);
+        screen.updateScreen();
+        System.out.println("\n Prepare yourself sir " + playerName + " the " + playerChoice + "\n" +
+                "   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
+                "   ░░░░░░░░░░░░▄█▀█░░░░░░░░░░░░░░\n" +
+                "   ░░░░░░░░░░▄█▀░░█░░░░░░░░░░░░░░\n" +
+                "   ░░░░░░░░▄█░░░░░█████▄▄░░░░░░░░\n" +
+                "   ░░░░░░▄█░░▄▄▀░░█░░░░░░▀█▄░░░░░\n" +
+                "   ░░░░░█░░░█▀░░░░░█░▄▄▄░░░░█░░░░\n" +
+                "   ░░░░█░░░▀░░░░░░░▐█▀░░▀█░░░█░░░\n" +
+                "   ░░░▐▌░░░░░░▄▄▄▄█▀█░█▌░▐░░░░█░░\n" +
+                "   ░░░▐█░░████▀░░░░░█░░░░█░░░░█░░\n" +
+                "   ░░█▀▀▀▀▀▀▀░░░░░▐█░▀██▀░░░░▐█░░\n" +
+                "   ░░█░░░░░░░░░░░░█▀░░░░░░░░░█░░░\n" +
+                "   ░░█░▌░█░░▌░░░█▀░░░░░░░░░░█░░░░\n" +
+                "   ░░█░█░▐░░░░▄▀░░░░░░░░░░▄▀░░░░░\n" +
+                "   ░░█░░▌░█░░█░░░░░░░░░░░▐▌░░░░░░\n" +
+                "   ░░░█░░░░░██▄░░░░░░▄▄▄▄██▄░░░░░\n" +
+                "   ░░░░█░░░█░░░█░▄██▀▀░░░░░░▀░░░░\n" +
+                "   ░░░░░█░░▌░░▄██▀░░░░░░░░░░░░░░░\n" +
+                "   ░░░░░░▀█▌░░▀░░░░░░░░░░░░░░░░░░\n" +
+                "   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
 
     }
 
