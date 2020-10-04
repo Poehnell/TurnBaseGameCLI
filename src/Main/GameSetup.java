@@ -6,8 +6,9 @@ public class GameSetup {
 
 
     public GameSetup() {
+        new Intro();
         DataInput scan = new DataInput();
-        scan.heroChoiceScanner();
+        scan.heroChoice();
 
         Job newPlayer = new Job(DataInput.playerName, DataInput.playerChoice);
         newPlayer.heroChoice();

@@ -6,7 +6,7 @@ import Enemys.EnemyManager;
 import java.util.Scanner;
 
 public class Combat {
-    int dieSize, playerHP, playerMP, playerInCombatDamage, enemyHealth, enemyMana;
+    int dieSize, playerHP, playerMP, playerInCombatDamage, enemyHealth, enemyMana, enemyDamage;
     String playerName, enemyName;
 
     Scanner scan = new Scanner(System.in);
@@ -25,19 +25,21 @@ public class Combat {
         this.enemyName = newEnemy.getEnemyName();
         this.enemyHealth = newEnemy.getHealth();
         this.enemyMana = newEnemy.getMana();
-        System.out.println("\n A " + newEnemy.getEnemyName() + " is attacking!");
-        System.out.print("\n    Press Enter!");
+        this.enemyDamage = newEnemy.getDamage();
+        System.out.println("\n A " + newEnemy.getEnemyName() + " is attacking! \n" +
+                newEnemy.getEnemyImage());
+        System.out.print("\n          Press Enter!");
         scan.nextLine();
         screen.updateScreen();
     }
 
 
     public void initiateCombat() {
-        Dice diceInitCombat = new Dice(dieSize);
-        if (diceInitCombat.diceRoll > diceInitCombat.diceSize) {
-            System.out.println("Dice roll " + diceInitCombat.diceRoll);
+        Dice diceCombat = new Dice(dieSize);
+        if (diceCombat.diceRoll > diceCombat.diceSize) {
+            System.out.println("Dice roll " + diceCombat.diceRoll);
             System.out.println("\nYou don't hesitate and land the first strike!");
-        } else if (diceInitCombat.diceRoll <= 4) {
+        } else if (diceCombat.diceRoll <= 4) {
             System.out.println("\n As the " + newEnemy.getEnemyName() + " draws near, you lock eyes with the beast.\n");
         }
 
@@ -47,9 +49,11 @@ public class Combat {
         if (enemyHealth > 0) {
             screen.updateScreen();
             gameBoard.drawGameBoard(enemyName, enemyHealth, enemyMana, this.playerName, this.playerHP, this.playerHP);
-            int choice = combatOptions();
+            combatOptions();
+            int choice = scan.nextInt();
             if (choice == 1) {
-                meleeAttack();
+                playerMeleeAttack();
+                enemyAttack();
                 battle();
 
             } else if (choice == 2) {
@@ -70,19 +74,17 @@ public class Combat {
     }
 
 
-    public int combatOptions() {
+    public void combatOptions() {
         System.out.print(" \n What will you do?\n" +
                 "   1. Melee attack!\n" +
                 "   2. Item\n" +
                 "\n Choose wisely : ");
-        int choice = scan.nextInt();
-        return choice;
 
 
     }
 
 
-    public void meleeAttack() {
+    public void playerMeleeAttack() {
         Dice dice = new Dice(dieSize);
         int diceRoll = dice.diceRoll;
         System.out.println("\n    Dice Roll = " + diceRoll);
@@ -105,6 +107,29 @@ public class Combat {
 
         }
 
+    }
+
+    public void enemyAttack() {
+        Dice dice = new Dice(dieSize);
+        int diceRoll = dice.diceRoll;
+        System.out.println("\n    Dice Roll = " + diceRoll);
+
+        if (diceRoll > dice.diceSize - 1) {
+            this.playerHP = this.playerHP - this.enemyDamage + 5;
+            System.out.println("    POW right in the kisser \n" +
+                    "    Watchout the " + enemyName + " hit you for " + (this.enemyDamage + 5) + " damage.");
+            screen.nextScreen();
+
+        } else if (diceRoll > 1 && diceRoll < dice.diceSize - 1) {
+            this.playerHP = this.playerHP - this.enemyDamage;
+            System.out.println("    WHACK! \n" +
+                    "    The " + enemyName + " hit you for " + (this.enemyDamage) + " damage.");
+            screen.nextScreen();
+
+        } else if (diceRoll < 2) {
+            System.out.println("    Swing and a MISS... what a silly bitch!");
+            screen.nextScreen();
+        }
     }
 
     public int getDieSize() {

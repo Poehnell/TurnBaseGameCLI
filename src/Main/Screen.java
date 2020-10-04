@@ -21,7 +21,7 @@ public class Screen {
     }
 
     public void nextScreen(){
-        System.out.println("\n\n        press Enter! ");
+        System.out.print("\n\n             press Enter! ");
         Scanner scan = new Scanner(System.in);
         scan.nextLine();
     }

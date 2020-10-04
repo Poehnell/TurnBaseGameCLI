@@ -8,24 +8,39 @@ public class EnemyManager {
     protected int health, damage, mana;
 
 
+    protected String enemyImage;
+
+
     public EnemyManager() {
     }
 
-    public void enemyPicker() { // feel like this needs a method instead of having to write out eac this.health = enemy.health
-        if (rand.nextInt(1) + 1 == 1) {
+    public void enemyPicker() {
+        int pickedEnemy = rand.nextInt(2);
+        if (pickedEnemy == 0) {
             enemyName = "Goblin";
             Goblin goblin = new Goblin();
             this.health = goblin.health;
             this.damage = goblin.damage;
             this.mana = goblin.mana;
-        } else if (rand.nextInt(1) + 1 == 2) {
+            this.enemyImage = goblin.image;
+        } else if (pickedEnemy == 1) {
             enemyName = "Troll";
+            Troll troll = new Troll();
+            this.health = troll.health;
+            this.damage = troll.damage;
+            this.mana = troll.mana;
+            this.enemyImage = troll.image;
 
         }
     }
 
+
     public String getEnemyName() {
         return enemyName;
+    }
+
+    public String getEnemyImage() {
+        return enemyImage;
     }
 
     public int getHealth() {
