@@ -38,8 +38,8 @@ public void playMusic(String musicLocation){
                 clip.start();
                 clip.loop(10);
 
-                JOptionPane.showMessageDialog(null, "Press OK to stop playing");
-                clip.stop();
+                
+
 
             } else {
                 System.out.println(" cant find file");
