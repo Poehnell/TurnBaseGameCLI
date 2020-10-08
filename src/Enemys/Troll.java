@@ -29,3 +29,4 @@ public class Troll extends Enemy {
         super("Troll", 100,10,15);
     }
 }
+

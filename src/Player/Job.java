@@ -1,12 +1,14 @@
 package Player;
 
+import java.util.ArrayList;
+
 public class Job extends Player {
     protected int vitality = 1, strength = 1, wisdom = 1;
     protected String playerName, playerChoice;
 
 
     public Job(String playerName, String playerChoice) {
-        super(2, 2, 2);
+        super(2, 2, 2, 10);
         this.playerName = playerName;
         this.playerChoice = playerChoice;
 
@@ -31,9 +33,18 @@ public class Job extends Player {
         this.strength = strength;
         this.wisdom = wisdom;
 
-        setHealth(health * this.vitality);
+        this.health = health * this.vitality;
         this.damage = damage * this.strength;
         this.mana = mana * this.wisdom;
+    }
+
+    public void updatePlayer(int playerHealth, int playerMana, int playerDamage, int playerGold, ArrayList<String> playerItems){
+        this.health = playerHealth;
+        this.mana = playerMana;
+        this.damage = playerDamage;
+        this.gold = playerGold;
+        this.playersBag.items = playerItems;
+
     }
 
     public int getVitality() {

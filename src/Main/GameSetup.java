@@ -1,18 +1,19 @@
 package Main;
 
+
+import Items.Merchant;
 import Player.Job;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
 import java.io.File;
-
 
 public class GameSetup {
 
 
     public GameSetup() {
+
         playMusic("music.wav");
         new Intro();
         DataInput scan = new DataInput();
@@ -20,6 +21,8 @@ public class GameSetup {
 
         Job newPlayer = new Job(DataInput.playerName, DataInput.playerChoice);
         newPlayer.heroChoice();
+        new Merchant(10, newPlayer.getPlayersBag().getItems());
+
         Combat combat = new Combat(6,newPlayer.getPlayerName(), newPlayer.getHealth(), newPlayer.getMana(), newPlayer.getDamage());
 
         combat.initiateCombat();
@@ -38,7 +41,7 @@ public void playMusic(String musicLocation){
                 clip.start();
                 clip.loop(10);
 
-                
+
 
 
             } else {

@@ -67,7 +67,7 @@ public class Combat {
             battle();
         } else if (getEnemyHealth() <= 0) {
             screen.updateScreen();
-            gameBoard.drawGameBoard(enemyName, enemyHealth, enemyMana, this.playerName, this.playerHP, this.playerHP);
+            gameBoard.drawGameBoard(enemyName, enemyHealth, enemyMana, this.playerName, this.playerHP, this.playerMP);
             System.out.println("\n\n       Fuck ya bud you just beat up the little " + enemyName);
             screen.nextScreen();
         }

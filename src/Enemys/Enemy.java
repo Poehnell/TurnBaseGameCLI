@@ -1,6 +1,5 @@
 package Enemys;
 
-import java.util.Random;
 
 public class Enemy {
     protected int health, damage, mana;
