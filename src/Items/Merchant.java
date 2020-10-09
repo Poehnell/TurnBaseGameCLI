@@ -1,6 +1,7 @@
 package Items;
 
 import Main.Screen;
+import Player.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,13 +10,11 @@ public class Merchant {
     Scanner scan = new Scanner(System.in);
     Screen screen = new Screen();
     int desission;
-    int playerGold;
-    ArrayList<String> playerItems;
+    private Player player;
     ItemBag merchantItems = new ItemBag();
 
-    public Merchant(int playerGold, ArrayList<String> playerItems) {
-        this.playerGold = playerGold;
-        this.playerItems = playerItems;
+    public Merchant(Player player) {
+        this.player = player;
         merchantBob();
         merchantMenue();
 
@@ -77,7 +76,7 @@ public class Merchant {
         System.out.print("\n 2. ");
         merchantItems.displayItem("Mana Potion", 1);
         System.out.print("\n 3. Return");
-        System.out.println(merchantItems.prices);
+        //System.out.println(merchantItems.prices);
         desission = screen.optionScreen();
 
         if (desission == 1) {
@@ -94,12 +93,12 @@ public class Merchant {
         }
     }
 
-    public void buyItem(int choice, String itemName) {
-        if (playerGold > merchantItems.prices.get(choice - 1)) {
-            playerGold = merchantItems.prices.get(choice - 1) - playerGold;
-            playerItems.add(itemName);
-        }
-    }
+//    public void buyItem(int choice, String itemName) {
+//        if (player.getGold() > merchantItems.prices.get(choice - 1)) {
+//            player.setGold(merchantItems.prices.get(choice - 1) - player.getGold());
+//            player.addItem(itemName);
+//        }
+//    }
 
 
     public void sellMenue() {

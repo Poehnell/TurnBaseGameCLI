@@ -1,22 +1,23 @@
 package Main;
 
+import Enemys.Enemy;
+import Enemys.EnemyManager;
+import Player.Player;
+
 import java.io.IOException;
 
 public class GameBoard {
-    String enemyName, playerName;
-    int enemyHP, enemyMP, playerHP, playerMP;
 
+    private Player player;
+    private Enemy enemy;
     public GameBoard(){
 
     }
 
-    public void drawGameBoard(String enemyName, int enemyHP, int enemyMP, String playerName, int playerHP, int playerMP) {
-        this.enemyName = enemyName;
-        this.enemyHP = enemyHP;
-        this.enemyMP = enemyMP;
-        this.playerName = playerName;
-        this.playerHP = playerHP;
-        this.playerMP = playerMP;
+    public void drawGameBoard(Enemy enemy, Player player) {
+        this.player = player;
+        this.enemy = enemy;
+
         int[][] gameBoard = new int[16][61];
         for (int i = 0; i < gameBoard.length; i++) {
             System.out.print('|');
@@ -27,20 +28,20 @@ public class GameBoard {
                 } else if (i == 1 && k == gameBoard[i].length / 4) {
                     System.out.print('E');
                 } else if (i == 1 && k == gameBoard[i].length / 2 + 6) {
-                    System.out.print(enemyName);
+                    System.out.print(this.enemy.getName());
                 } else if (i == 2 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("HP : " + enemyHP);
+                    System.out.print("HP : " + this.enemy.getHealth());
                 } else if (i == 3 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("MP : " + enemyMP);
+                    System.out.print("MP : " + this.enemy.getMana());
                 } else if (i == gameBoard.length / 2 && k >= 0 && k < gameBoard[i].length) {
                     System.out.print('`');
 //hero section of game board---------------------------------------------
                 } else if (i == gameBoard.length / 2 + 1 && k == gameBoard[i].length / 2 + 6) {
-                    System.out.print(playerName);
+                    System.out.print(this.player.getPlayerName());
                 } else if (i == gameBoard.length / 2 + 2 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("HP : " + playerHP);
+                    System.out.print("HP : " + this.player.getHealth());
                 } else if (i == gameBoard.length / 2 + 3 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("MP : " + playerMP);
+                    System.out.print("MP : " + this.player.getMana());
 
                 } else if (i == gameBoard.length - 2 && k == gameBoard[i].length / 4) {
                     System.out.print('H');

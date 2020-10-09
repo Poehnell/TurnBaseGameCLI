@@ -1,8 +1,10 @@
 package Main;
 
 
-import Items.Merchant;
+import Enemys.Enemy;
+import Enemys.EnemyManager;
 import Player.Job;
+import Player.Player;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -11,25 +13,25 @@ import java.io.File;
 
 public class GameSetup {
 
+    private Player newPlayer;
+    private Enemy enemy;
 
     public GameSetup() {
 
         playMusic("music.wav");
         new Intro();
-        DataInput scan = new DataInput();
-        scan.heroChoice();
+        PlayerPicker playerPicker = new PlayerPicker();
+        this.newPlayer = new Job(playerPicker.getPlayerChoice(), playerPicker.getPlayerName()).getPlayerJob();
 
-        Job newPlayer = new Job(DataInput.playerName, DataInput.playerChoice);
-        newPlayer.heroChoice();
-        new Merchant(10, newPlayer.getPlayersBag().getItems());
-
-        Combat combat = new Combat(6,newPlayer.getPlayerName(), newPlayer.getHealth(), newPlayer.getMana(), newPlayer.getDamage());
+        this.enemy = new EnemyManager().getNewEnemy();
+        Combat combat = new Combat(this.newPlayer, this.enemy);
 
         combat.initiateCombat();
         combat.battle();
 
     }
-public void playMusic(String musicLocation){
+
+    public void playMusic(String musicLocation) {
         try {
             File musicPath = new File(musicLocation);
 
@@ -42,14 +44,11 @@ public void playMusic(String musicLocation){
                 clip.loop(10);
 
 
-
-
             } else {
                 System.out.println(" cant find file");
             }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-}
+    }
 }

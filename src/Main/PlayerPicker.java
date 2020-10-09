@@ -1,18 +1,21 @@
 package Main;
 
+
 import Player.Job;
 import Player.Knight;
 import Player.Mage;
+import Player.Player;
+
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class DataInput {
+public class PlayerPicker {
 
-    public static String playerName = "";
-    public static String playerChoice = "";
+    private String playerChoice = "";
+    private String playerName = "";
 
-    Job job = new Job(playerName, playerChoice);
+
     Knight startKnight = new Knight();
     Mage startMage = new Mage();
     Scanner scan = new Scanner(System.in);
@@ -20,10 +23,7 @@ public class DataInput {
     Screen screen = new Screen();
     int heroOption;
 
-    public DataInput() {
-    }
-
-    public void heroChoice() {
+    public PlayerPicker() {
 
 
         System.out.print("\n                         Choose your Destiny :\n " +
@@ -51,7 +51,7 @@ public class DataInput {
                 "   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░         ░░░░░░░░░██▀▀░░░░░░░░░░░░░░░░░\n" +
                 "    Vit = "  + startKnight.getVitality() + "                               Vit = "  + startMage.getVitality() + " \n" +
                 "    Str = "  + startKnight.getStrength() + "                               Str = "  + startMage.getStrength() + " \n" +
-                "    Wis = "  + startKnight.getWisdom()   + "                                Wis = "  + startMage.getWisdom()  + " \n" +
+                "    Wis = "  + startKnight.getWisdom()   + "                                Wis = "  +startMage.getWisdom()  + " \n" +
                 "\n" +
                 "\n" +
 
@@ -72,6 +72,22 @@ public class DataInput {
         }else if (playerChoice == "Mage")
             System.out.println("\n Prepare yourself Wise " + playerName + " the " + playerChoice);
 
+    }
+
+    public String getPlayerChoice() {
+        return playerChoice;
+    }
+
+    public void setPlayerChoice(String playerChoice) {
+        this.playerChoice = playerChoice;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public void choiceScanner() {

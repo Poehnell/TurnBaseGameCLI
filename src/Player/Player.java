@@ -4,18 +4,33 @@ package Player;
 import Items.ItemBag;
 
 public class Player {
-    protected int health, mana, damage, gold;
-    ItemBag playersBag = new ItemBag();
+    protected int health, mana, damage, gold, dieSize;
+    protected int vitality, wisdom, strength;
+    protected String playerName = "nope";
+    protected String playerJob ="nope";
+    protected ItemBag playersBag = new ItemBag();
 
 
-    public Player(int health, int mana, int damage, int gold) {
-        this.health = health;
-        this.mana = mana;
-        this.damage = damage;
+    public Player(int vitality, int wisdom, int strength, int gold, int dieSize) {
+        this.health = vitality * 2;
+        this.mana = wisdom * 2;
+        this.damage = strength * 2;
         this.gold = gold;
+        this.vitality = vitality;
+        this.wisdom = wisdom;
+        this.strength = strength;
+        this.dieSize = dieSize;
 
 
 
+    }
+
+    public int getDieSize() {
+        return dieSize;
+    }
+
+    public void setDieSize(int dieSize) {
+        this.dieSize = dieSize;
     }
 
     public ItemBag getPlayersBag() {
@@ -26,6 +41,22 @@ public class Player {
         this.playersBag = playersBag;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getPlayerJob() {
+        return playerJob;
+    }
+
+    public void setPlayerJob(String playerJob) {
+        this.playerJob = playerJob;
+    }
+
     public int getGold() {
         return gold;
     }
@@ -34,8 +65,11 @@ public class Player {
         this.gold = gold;
     }
 
-    public int getHealth() {
+    public void addItem(String itemName) {
+        this.playersBag.addItem(itemName);
+    }
 
+    public int getHealth() {
         return health;
     }
 
@@ -57,6 +91,30 @@ public class Player {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public void setVitality(int vitality) {
+        this.vitality = vitality;
+    }
+
+    public int getWisdom() {
+        return wisdom;
+    }
+
+    public void setWisdom(int wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 }
 

@@ -1,37 +1,47 @@
 package Player;
 
-public class Mage {
-    protected int vitality = 10;
+public class Mage extends Player {
+    protected String jobType = "Mage";
+    protected String mageImage =
+            "              2. Mage:           \n" +
+            "   ░░░░░░░░░░░░░░░░░▄▀▀▄░░░░░░░░░\n" +
+            "   ░░░░░░░░░░░░░░░░█░░░░█░░░░░░░░\n" +
+            "   ░░░░░░░░░░░░░▄█▀░░░█▄░█░░░░░░░\n" +
+            "   ░░░░░░░░░░░░█░░░░░░▐░▀█▌░░░░░░\n" +
+            "   ░░░░░░░░░░▄█░░░░░░░█░░░░░░░░░░\n" +
+            "   ░░░░░░░░░█░░░░░░░░░▌░░░░░░░░░░\n" +
+            "   ░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░\n" +
+            "   ░░░░░░██░░░░░░░░░░░█▀█▄░░░░░░░\n" +
+            "   ░░░█▀▀▀▀░░░░░░░░░░░░░░░▀█▄░░░░\n" +
+            "   ░██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄██░░░\n" +
+            "   ░░░░░░▐█░░░░░░░░░▐███░░░░░░░░░\n" +
+            "   ░░░░░░▐██░░░░░░░░█████░░░░░░░░\n" +
+            "   ░░░░░█▀░░░░░░░░░░█████░░░░░░░░\n" +
+            "   ░░░░█░░░▄░░░░░░░██████░░░░░░░░\n" +
+            "   ░░░░▀▀▀██▄▄░░░░████████░░░░░░░\n" +
+            "   ░░░░░░░█░░░██▌░███░░░███░░░░░░\n" +
+            "   ░░░░░░░░██▄██████░░░░░██░░░░░░\n" +
+            "   ░░░░░░░░███████░░░░░░░░█▌░░░░░\n" +
+            "   ░░░░░░░░█████░░░░░░░░░░░░░░░░░\n" +
+            "   ░░░░░░░░░██▀▀░░░░░░░░░░░░░░░░░";
 
-    public int getVitality() {
-        return vitality;
+    public Mage() {
+        super(10, 15, 5, 100,6);
     }
 
-    public void setVitality(int vitality) {
-        this.vitality = vitality;
+    public String getJobType() {
+        return jobType;
     }
 
-    public int getStrength() {
-        return strength;
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public String getMageImage() {
+        return mageImage;
     }
 
-    public int getWisdom() {
-        return wisdom;
+    public void setMageImage(String mageImage) {
+        this.mageImage = mageImage;
     }
-
-    public void setWisdom(int wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    protected int strength = 5;
-    protected int wisdom = 15;
-
-    public Mage(){
-    }
-
-
 }

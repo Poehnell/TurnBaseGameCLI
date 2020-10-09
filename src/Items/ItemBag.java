@@ -6,8 +6,8 @@ import java.util.Collections;
 public class ItemBag {
 
 
-    public ArrayList<String> items = new ArrayList<String>();
-    public ArrayList<Integer> prices = new ArrayList<Integer>();
+    private ArrayList<String> items = new ArrayList<String>();
+    private ArrayList<Integer> prices = new ArrayList<Integer>();
 
 
     public ItemBag() {

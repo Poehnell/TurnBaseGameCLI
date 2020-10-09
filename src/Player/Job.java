@@ -1,84 +1,46 @@
 package Player;
 
-import java.util.ArrayList;
+public class Job {
+    private String playerChoice, playerName;
+    private Player playerJob;
 
-public class Job extends Player {
-    protected int vitality = 1, strength = 1, wisdom = 1;
-    protected String playerName, playerChoice;
-
-
-    public Job(String playerName, String playerChoice) {
-        super(2, 2, 2, 10);
+    public Job(String playerChoice,String playerName) {
         this.playerName = playerName;
         this.playerChoice = playerChoice;
-
-    }
-
-
-    public void heroChoice() {
         if (playerChoice == "Knight") {
-            Knight knight = new Knight();
-            baseStatMultiplier(knight.vitality, knight.strength, knight.wisdom);
-
+            this.playerJob = new Knight();
+            playerJob.setPlayerName(playerName);
 
 
         } else if (playerChoice == "Mage") {
-            Mage mage = new Mage();
-            baseStatMultiplier(mage.vitality, mage.strength, mage.wisdom);
+            this.playerJob = new Mage();
+            playerJob.setPlayerName(playerName);
         }
     }
 
-    public void baseStatMultiplier(int vitality, int strength, int wisdom) {
-        this.vitality = vitality;
-        this.strength = strength;
-        this.wisdom = wisdom;
 
-        this.health = health * this.vitality;
-        this.damage = damage * this.strength;
-        this.mana = mana * this.wisdom;
+    public String getPlayerChoice() {
+        return playerChoice;
     }
 
-    public void updatePlayer(int playerHealth, int playerMana, int playerDamage, int playerGold, ArrayList<String> playerItems){
-        this.health = playerHealth;
-        this.mana = playerMana;
-        this.damage = playerDamage;
-        this.gold = playerGold;
-        this.playersBag.items = playerItems;
-
+    public void setPlayerChoice(String playerChoice) {
+        this.playerChoice = playerChoice;
     }
 
-    public int getVitality() {
-        return this.vitality;
+    public Player getPlayerJob() {
+        return playerJob;
     }
 
-    public void setVitality(int vitality) {
-        this.vitality = vitality;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public int getWisdom() {
-        return wisdom;
-    }
-
-    public void setWisdom(int wisdom) {
-        this.wisdom = wisdom;
+    public void setPlayerJob(Player playerJob) {
+        this.playerJob = playerJob;
     }
 
     public String getPlayerName() {
         return playerName;
     }
 
-    public String getPlayerChoice() {
-        return playerChoice;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
-
-
 }
 
