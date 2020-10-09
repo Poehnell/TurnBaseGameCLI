@@ -20,14 +20,14 @@ public class GameSetup {
 
         playMusic("music.wav");
         new Intro();
+
         PlayerPicker playerPicker = new PlayerPicker();
         this.newPlayer = new Job(playerPicker.getPlayerChoice(), playerPicker.getPlayerName()).getPlayerJob();
+        System.out.println(this.newPlayer.getHealth());
 
         this.enemy = new EnemyManager().getNewEnemy();
         Combat combat = new Combat(this.newPlayer, this.enemy);
 
-        combat.initiateCombat();
-        combat.battle();
 
     }
 

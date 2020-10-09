@@ -7,7 +7,8 @@ public class EnemyManager {
     private Enemy newEnemy;
 
     public EnemyManager() {
-        int pickedEnemy = rand.nextInt(3);
+        int pickedEnemy = rand.nextInt(2);
+        System.out.println(pickedEnemy);
         if (pickedEnemy == 0) {
             this.newEnemy = new Goblin();
 

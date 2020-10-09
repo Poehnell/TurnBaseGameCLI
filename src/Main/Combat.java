@@ -22,18 +22,17 @@ public class Combat {
         this.player = player;
         this.newEnemy = newEnemy;
 
-
-
-
         System.out.println("\n A " + this.newEnemy.getName() + " is attacking! ");
         System.out.print("\n          Press Enter!");
         scan.nextLine();
         screen.updateScreen();
+        initiateCombat();
+        battle();
     }
 
 
     public void initiateCombat() {
-        newDice.rollDice(this.player.getDieSize());
+        this.newDice.rollDice(this.player.getDieSize());
         if (this.newDice.diceRoll > this.player.getDieSize() - 1) {
             System.out.println("Dice roll " + this.newDice.diceRoll);
             System.out.println("\nYou don't hesitate and land the first strike!");
@@ -83,11 +82,11 @@ public class Combat {
 
 
     public void playerMeleeAttack() {
-        newDice.rollDice(this.player.getDieSize());
+        this.newDice.rollDice(this.player.getDieSize());
         System.out.println("\n    Dice Roll = " + this.newDice.diceRoll);
 
         if (this.newDice.diceRoll > this.player.getDieSize() - 1) {
-            newEnemy.setHealth(this.newEnemy.getHealth() - (this.player.getDamage() + 5));
+            this.newEnemy.setHealth(this.newEnemy.getHealth() - (this.player.getDamage() + 5));
             System.out.println("    CRITICAL FUCKIN HIT!\n" +
                     "    The " + this.newEnemy.getName() + "took " + (this.player.getDamage() + 5) + " damage.");
             screen.nextScreen();
@@ -107,7 +106,7 @@ public class Combat {
     }
 
     public void enemyAttack() {
-        newDice.rollDice(this.newEnemy.getDieSize());
+        this.newDice.rollDice(this.newEnemy.getDieSize());
         System.out.println("\n    Dice Roll = " + this.newDice.diceRoll);
 
         if (this.newDice.diceRoll > this.newEnemy.getDieSize() + 1) {
@@ -117,7 +116,7 @@ public class Combat {
             screen.nextScreen();
 
         } else if (this.newDice.diceRoll > 1 && this.newDice.diceRoll < this.newEnemy.getDieSize() + 1) {
-            player.setHealth(this.player.getHealth() - this.newEnemy.getDamage());
+            this.player.setHealth(this.player.getHealth() - this.newEnemy.getDamage());
             System.out.println("    WHACK! \n" +
                     "    The " + this.newEnemy.getName() + " hit you for " + (this.newEnemy.getDamage()) + " damage.");
             screen.nextScreen();
