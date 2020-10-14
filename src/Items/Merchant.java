@@ -3,7 +3,6 @@ package Items;
 import Main.Screen;
 import Player.Player;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Merchant {
@@ -109,7 +108,7 @@ public class Merchant {
         merchantItems.addItem(new HealthPotion(1) ,3);
         merchantItems.showInventory();
         System.out.println("remove one");
-        merchantItems.removeItems("Health Potion",1);
+        merchantItems.removeItem(1,1);
         merchantItems.showInventory();
         System.out.println("add one");
         merchantItems.addItem(new HealthPotion(1),1);

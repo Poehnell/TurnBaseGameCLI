@@ -5,9 +5,6 @@ public class HealthPotion extends Potions {
     protected int addHealth = 10;
     protected int id = 0;
 
-
-
-
     public HealthPotion(int id){
         this.id = id;
     }

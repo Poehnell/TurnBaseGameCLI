@@ -15,6 +15,14 @@ public abstract class Item {
 
     public abstract String type();
 
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public void removeQuantity(int quantity) {
+        this.quantity -= quantity;
+    }
+
     public int getQuantity() {
         return quantity;
     }
