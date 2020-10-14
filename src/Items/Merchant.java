@@ -108,7 +108,7 @@ public class Merchant {
         merchantItems.addItem(new HealthPotion(1) ,3);
         merchantItems.showInventory();
         System.out.println("remove one");
-        merchantItems.removeItem(1,1);
+        merchantItems.removeItem(new HealthPotion(1),1);
         merchantItems.showInventory();
         System.out.println("add one");
         merchantItems.addItem(new HealthPotion(1),1);
