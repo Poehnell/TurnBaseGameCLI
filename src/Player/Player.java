@@ -1,6 +1,6 @@
 package Player;
 
-
+import Items.Item;
 import Items.ItemBag;
 
 public class Player {
@@ -63,10 +63,6 @@ public class Player {
 
     public void setGold(int gold) {
         this.gold = gold;
-    }
-
-    public void addItem(String itemName) {
-        this.playersBag.addItem(itemName);
     }
 
     public int getHealth() {

@@ -1,10 +1,10 @@
 package Player;
 
-public class Job {
+public class ClassCreator {
     private String playerChoice, playerName;
     private Player playerJob;
 
-    public Job(String playerChoice,String playerName) {
+    public ClassCreator(String playerChoice, String playerName) {
         this.playerName = playerName;
         this.playerChoice = playerChoice;
         if (playerChoice == "Knight") {

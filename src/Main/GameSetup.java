@@ -3,7 +3,8 @@ package Main;
 
 import Enemys.Enemy;
 import Enemys.EnemyManager;
-import Player.Job;
+import Items.Merchant;
+import Player.ClassCreator;
 import Player.Player;
 
 import javax.sound.sampled.AudioInputStream;
@@ -18,15 +19,14 @@ public class GameSetup {
 
     public GameSetup() {
 
-        playMusic("music.wav");
-        new Intro();
+        //playMusic("music.wav");
+        //new Intro();
 
-        PlayerPicker playerPicker = new PlayerPicker();
-        this.newPlayer = new Job(playerPicker.getPlayerChoice(), playerPicker.getPlayerName()).getPlayerJob();
-        System.out.println(this.newPlayer.getHealth());
-
-        this.enemy = new EnemyManager().getNewEnemy();
-        Combat combat = new Combat(this.newPlayer, this.enemy);
+        //PlayerInitiator initiator = new PlayerInitiator();
+        //this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
+        new Merchant(this.newPlayer);
+        //this.enemy = new EnemyManager().getNewEnemy();
+        //new Combat(this.newPlayer, this.enemy);
 
 
     }

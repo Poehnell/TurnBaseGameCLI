@@ -1,16 +1,14 @@
 package Main;
 
 
-import Player.Job;
 import Player.Knight;
 import Player.Mage;
-import Player.Player;
 
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class PlayerPicker {
+public class PlayerInitiator {
 
     private String playerChoice = "";
     private String playerName = "";
@@ -23,7 +21,7 @@ public class PlayerPicker {
     Screen screen = new Screen();
     int heroOption;
 
-    public PlayerPicker() {
+    public PlayerInitiator() {
 
 
         System.out.print("\n                         Choose your Destiny :\n " +

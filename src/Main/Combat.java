@@ -1,8 +1,6 @@
 package Main;
 
 import Enemys.Enemy;
-import Enemys.EnemyManager;
-import Player.Job;
 import Player.Player;
 
 
