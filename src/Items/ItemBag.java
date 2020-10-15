@@ -22,11 +22,9 @@ public class ItemBag {
                 if (item.id() == inventory.get(i).id()) {
                     inventory.get(i).addQuantity(quantity);
                 }
-                else {
-                    inventory.add(item);
-                    item.setQuantity(quantity);
-                }
             }
+            inventory.add(item);
+            item.setQuantity(quantity);
         }
     }
 
