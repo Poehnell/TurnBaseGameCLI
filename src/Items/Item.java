@@ -15,6 +15,8 @@ public abstract class Item {
 
     public abstract String type();
 
+    public abstract Item create();
+
     public void addQuantity(int quantity) {
         this.quantity += quantity;
     }
@@ -24,7 +26,7 @@ public abstract class Item {
     }
 
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(int quantity) {

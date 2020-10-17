@@ -1,13 +1,13 @@
 package Items;
 
 public class ManaPotion extends Potions {
-    protected int addMana = 10;
-    protected int id = 0;
+    private int addMana = 10;
+    private int id = 0;
 
 
-public ManaPotion(int id){
-    this.id = id;
-}
+    public ManaPotion(int id) {
+        this.id = id;
+    }
 
     @Override
     public int drinkPotion() {
@@ -34,6 +34,12 @@ public ManaPotion(int id){
         return "Potion";
     }
 
+    @Override
+    public Item create() {
+        return new ManaPotion(2);
+    }
 
 
 }
+
+

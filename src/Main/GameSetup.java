@@ -22,8 +22,8 @@ public class GameSetup {
         //playMusic("music.wav");
         //new Intro();
 
-        //PlayerInitiator initiator = new PlayerInitiator();
-        //this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
+        PlayerInitiator initiator = new PlayerInitiator();
+        this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
         new Merchant(this.newPlayer);
         //this.enemy = new EnemyManager().getNewEnemy();
         //new Combat(this.newPlayer, this.enemy);

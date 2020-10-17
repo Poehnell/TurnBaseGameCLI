@@ -2,10 +2,10 @@ package Items;
 
 public class HealthPotion extends Potions {
 
-    protected int addHealth = 10;
-    protected int id = 0;
+    private int addHealth = 10;
+    private int id = 0;
 
-    public HealthPotion(int id){
+    public HealthPotion(int id) {
         this.id = id;
     }
 
@@ -27,12 +27,17 @@ public class HealthPotion extends Potions {
 
     @Override
     public int cost() {
-        return 5;
+        return 10;
     }
 
     @Override
     public String type() {
         return "Potion";
+    }
+
+    @Override
+    public Item create() {
+        return new HealthPotion(1);
     }
 
 

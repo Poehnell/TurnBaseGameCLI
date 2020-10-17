@@ -10,11 +10,12 @@ public class Merchant {
     Screen screen = new Screen();
     int desission;
     private Player player;
-    ItemBag merchantItems = new ItemBag();
+    ItemBag merchantBobsBag = new ItemBag();
 
     public Merchant(Player player) {
         this.player = player;
         merchantBob();
+        merchantMenue(merchantBobsBag);
 
 
     }
@@ -46,78 +47,68 @@ public class Merchant {
                 "   ░░░░░░░░░█░░░░░░░░░░░░░░║╔╝║║║═╣═╣║║║╔╣╔╝░░░░░░░░░░░░█░░░░░░░░░░▌\n");
     }
 
+
     public void cash() {
 
     }
 
-//    public void merchantMenue() {
-//        screen.updateScreen();
-//        merchantImage();
-//        System.out.println("\n\n What the fuck do you want? \n" +
-//                "\n 1. Buy Items. \n" +
-//                " 2. Sell Items. \n" +
-//                " 3. Leave ");
-//
-//        desission = screen.optionScreen();
-//        if (desission == 1) {
-//            buyMenue();
-//        } else if (desission == 2) {
-//            sellMenue();
-//        }
-//    }
+    public void merchantMenue(ItemBag itemBag) {
+        screen.updateScreen();
+        merchantImage();
+        System.out.println("\n\n What the fuck do you want? \n" +
+                "\n 1. Buy Items. \n" +
+                " 2. Sell Items. \n" +
+                " 3. Leave ");
 
-//    public void buyMenue() {
-//        screen.updateScreen();
-//        merchantImage();
-//        System.out.println("\n\n Hurry up already and pick something");
-//        System.out.print("\n 1. ");
-//        merchantItems.displayItem("Health Potion", 0);
-//        System.out.print("\n 2. ");
-//        merchantItems.displayItem("Mana Potion", 1);
-//        System.out.print("\n 3. Return");
-//        //System.out.println(merchantItems.prices);
-//        desission = screen.optionScreen();
-//
-//        if (desission == 1) {
-//            System.out.println("\n\n            All sold out");
-//            screen.nextScreen();
-//            buyMenue();
-//        } else if (desission == 2) {
-//            System.out.println("\n\n            Nope non of those");
-//            screen.nextScreen();
-//            buyMenue();
-//        } else if (desission == 3) {
-//            merchantMenue();
-//
-//        }
-//    }
-
-    public void buyItem(int choice, String itemName) {
+        desission = screen.optionScreen();
+        if (desission == 1) {
+            buyMenue(itemBag);
+        } else if (desission == 2) {
+            sellMenue();
+        }
     }
 
+    public void buyMenue(ItemBag itemBag) {
+        screen.updateScreen();
+        merchantImage();
+        System.out.println("\n\n Hurry up already and pick something \n" +
+                "\n Your Gold: " + this.player.getGold() );
+        itemBag.showInventory();
+        this.player.getPlayersBag().showInventory();
+        desission = screen.optionScreen();
 
-    public void sellMenue() {
+        buyItem(itemBag);
+    }
+
+        public void buyItem(ItemBag itemBag){
+            if (this.player.getGold() > itemBag.getItem(desission - 1).cost()) {
+                this.player.setGold(this.player.getGold() - itemBag.getItem(desission - 1).cost());
+                this.player.getPlayersBag().createItem(itemBag.getItem(desission - 1));
+                itemBag.removeItem(itemBag.getItem(desission - 1),1);
+
+
+                screen.updateScreen();
+                buyMenue(itemBag);
+            } else {
+                System.out.println("You do NOT have enough gold you Poor bastard");
+                buyMenue(itemBag);
+            }
+        }
+
+public void sellMenue(){
         screen.updateScreen();
         merchantImage();
         System.out.println("\n\n You don't have any items you worth selling");
         screen.nextScreen();
         //merchantMenue();
-    }
+        }
 
-    public void merchantBob() {
-        merchantItems.addItem(new HealthPotion(1) ,3);
-        merchantItems.showInventory();
-        System.out.println("remove one");
-        merchantItems.removeItem(new HealthPotion(1),1);
-        merchantItems.showInventory();
-        System.out.println("add one");
-        merchantItems.addItem(new HealthPotion(1),1);
-        merchantItems.showInventory();
+public void merchantBob(){
+        merchantBobsBag.addItem(new HealthPotion(1),3);
+        merchantBobsBag.addItem(new ManaPotion(2),3);
 
 
-
-
-    }
-}
+        }
+        }
 
 
