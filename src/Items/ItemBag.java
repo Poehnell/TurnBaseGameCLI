@@ -37,11 +37,16 @@ public class ItemBag {
                     found = true;
                 }
             }
+<<<<<<< HEAD
             if (!found) {
                 inventory.add(item);
                 item.setQuantity(quantity);
             }
 
+=======
+            inventory.add(item);
+            item.setQuantity(quantity);
+>>>>>>> bcd98cb7d8cd300b6ad15cb44b8061ede544977b
         }
     }
 
