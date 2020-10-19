@@ -13,15 +13,24 @@ public class ItemBag {
     }
 
 
-    public Item createItem(Item item) {
-        inventory.add(item.create());
-        for (int i = 0; i <= inventory.size() - 1; i++) {
-            if (item.id() == inventory.get(i).id()) {
-                inventory.get(i).addQuantity(1);
+    public void transferItem(Item item) {
+        boolean found = false;
+        if (inventory.size() == 0) {
+            inventory.add(item.create());
+            inventory.get(0).setQuantity(1);
+            found = true;
+        } else {
+            for (int i = 0; i <= inventory.size() - 1; i++) {
+                if (item.getid() == inventory.get(i).getid() && !found) {
+                    inventory.get(i).addQuantity(1);
+                    found = true;
+                }
             }
         }
-        return item;
-
+        if (!found) {
+            inventory.add(item.create());
+            inventory.get(findItem(item)).setQuantity(1);
+        }
     }
 
 
@@ -32,21 +41,17 @@ public class ItemBag {
         } else {
             boolean found = false;
             for (int i = 0; i <= inventory.size() - 1; i++) {
-                if (item.id() == inventory.get(i).id()) {
+                if (item.getid() == inventory.get(i).getid()) {
                     inventory.get(i).addQuantity(quantity);
                     found = true;
                 }
             }
-<<<<<<< HEAD
+
             if (!found) {
                 inventory.add(item);
                 item.setQuantity(quantity);
             }
 
-=======
-            inventory.add(item);
-            item.setQuantity(quantity);
->>>>>>> bcd98cb7d8cd300b6ad15cb44b8061ede544977b
         }
     }
 
@@ -54,36 +59,45 @@ public class ItemBag {
     public void removeItem(Item item, int quantity) {
         boolean found = false;
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).id() == item.id()) {
+            if (inventory.get(i).getid() == item.getid()) {
                 inventory.get(i).removeQuantity(quantity);
-//                if (inventory.get(i).getQuantity() <= 0) {
-//                    inventory.remove(inventory.get(i));
-//                }
+                if (inventory.get(i).getQuantity() <= 0) {
+                    inventory.remove(inventory.get(i));
+                }
             }
         }
     }
 
 
-    public void showInventory() {
+    public void showInventoryCost() {
         for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(i + 1 + ". - " + inventory.get(i).name() + " : " + inventory.get(i).getQuantity());
-            System.out.println("        " + inventory.get(i).cost() + "g");
+            System.out.println(" " + (i + 1) + ". - " + inventory.get(i).name() + " : " + inventory.get(i).getQuantity());
+            System.out.println("      " + inventory.get(i).cost() + "g\n");
         }
 
     }
 
-//    public int inventoryItemPosition() {
-//        for (int i = 0; i < inventory.size(); i++) {
-//
-//        }
-//
-//
-//    }
+    public void showInventory() {
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println("\n " + (i + 1) + ". - " + inventory.get(i).name() + " : " + inventory.get(i).getQuantity());
+        }
+    }
+
+    public int findItem(Item item) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getid() == item.getid()) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
 
     public Item getItem(int index) {
         return inventory.get(index);
     }
 
-
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
 }

@@ -20,13 +20,13 @@ public class Screen {
     }
 
     public void nextScreen() {
-        System.out.print("\n\n             press Enter ");
+        System.out.print("\n\n                            press Enter ");
         Scanner scan = new Scanner(System.in);
         scan.nextLine();
     }
 
     public int optionScreen() {
-        System.out.print("\n\n  Choice : ");
+        System.out.print("\n\n                              Choice : ");
         return scan.nextInt();
 
     }

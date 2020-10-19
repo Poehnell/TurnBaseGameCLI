@@ -17,7 +17,7 @@ public class GameSetup {
     private Player newPlayer;
     private Enemy enemy;
 
-    public GameSetup() {
+    public GameSetup(){
 
         //playMusic("music.wav");
         //new Intro();

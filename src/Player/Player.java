@@ -64,6 +64,12 @@ public class Player {
     public void setGold(int gold) {
         this.gold = gold;
     }
+    public void addGold(int gold){
+        this.gold += gold;
+    }
+    public void removeGold(int gold){
+        this.gold -= gold;
+    }
 
     public int getHealth() {
         return health;
