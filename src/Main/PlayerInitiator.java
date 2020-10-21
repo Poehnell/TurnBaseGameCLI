@@ -3,7 +3,6 @@ package Main;
 
 import Player.Knight;
 import Player.Mage;
-import Player.Player;
 
 
 import java.util.Random;
@@ -20,12 +19,14 @@ public class PlayerInitiator {
     Scanner scan = new Scanner(System.in);
     Random random = new Random();
     Screen screen = new Screen();
-    int heroOption;
+    int decision;
 
     public PlayerInitiator() {
+        menue();
+
+    }
+public void menue(){
         screen.updateScreen();
-
-
         System.out.print("\n                         Choose your Destiny :\n " +
                 "------------------------------------------------------------------------\n\n" +
                 "            1. Knight:                             2. Mage: \n" +
@@ -57,8 +58,8 @@ public class PlayerInitiator {
 
                 "   Make your choice : ");
 
-        choiceScanner();
-        if (heroOption == 1) {
+        decision = screen.optionScreen();
+        if (decision == 1) {
             screen.updateScreen();
             System.out.println("" +
                     "   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
@@ -84,7 +85,7 @@ public class PlayerInitiator {
 
             playerChoice = "Knight";
             System.out.print("\n   You have chosen  the Knight \n\n   Enter your name : ");
-        } else if (heroOption == 2) {
+        } else if (decision == 2) {
             screen.updateScreen();
             System.out.println("" +
                     "   ░░░░░░░░░░░░░░░░░▄▀▀▄░░░░░░░░░\n" +
@@ -109,6 +110,8 @@ public class PlayerInitiator {
                     "   ░░░░░░░░░██▀▀░░░░░░░░░░░░░░░░░");
             playerChoice = "Mage";
             System.out.print(" \n   You have chosen the Mage \n\n   Enter your Name : ");
+        }else if (decision == 0) {
+            menue();
         }
         playerName = scan.next();
         screen.updateScreen();
@@ -136,7 +139,7 @@ public class PlayerInitiator {
     }
 
     public void choiceScanner() {
-        heroOption = scan.nextInt();
+        decision = scan.nextInt();
 
 
     }

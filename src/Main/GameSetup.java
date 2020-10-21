@@ -1,11 +1,8 @@
 package Main;
 
-
-import Enemys.Enemy;
-import Enemys.EnemyManager;
-import Items.Merchant;
 import Player.ClassCreator;
 import Player.Player;
+import Town.*;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,20 +12,47 @@ import java.io.File;
 public class GameSetup {
 
     private Player newPlayer;
-    private Enemy enemy;
+    private int decision;
+    Screen screen = new Screen();
+
 
     public GameSetup(){
 
-        //playMusic("music.wav");
-        //new Intro();
 
+        playMusic("music.wav");
+        screen.intro();
         PlayerInitiator initiator = new PlayerInitiator();
         this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
-        new Merchant(this.newPlayer);
-        //this.enemy = new EnemyManager().getNewEnemy();
-        //new Combat(this.newPlayer, this.enemy);
+        Town town = new Town(this.newPlayer);
+        Tower tower = new Tower(this.newPlayer);
+        Merchant merchant = new Merchant(this.newPlayer,tower.getFloor());
+
+        while (!this.newPlayer.isGameOver()){
+            if (this.newPlayer.getPlayerLocation() == 0){
+                town.menue();
+            }else if (this.newPlayer.getPlayerLocation() == 1){
+                merchant.merchantMenue(merchant.getMerchantBag());
+            }else if (this.newPlayer.getPlayerLocation() == 2){
+                tower.mainFloor();
+            }
+        }
+        gameOver();
 
 
+
+
+    }
+    public void gameOver(){
+        screen.gameOver();
+        System.out.println("\n\n   1. Try again? \n" +
+                "\n   2. Quit");
+        decision = screen.optionScreen();
+        if (decision == 1){
+            new GameSetup();
+        }else if (decision == 2){
+        }else if (decision == 0){
+            gameOver();
+        }
     }
 
     public void playMusic(String musicLocation) {

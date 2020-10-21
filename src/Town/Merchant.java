@@ -1,5 +1,8 @@
-package Items;
+package Town;
 
+import Items.HealthPotion;
+import Items.ItemBag;
+import Items.ManaPotion;
 import Main.Screen;
 import Player.Player;
 
@@ -8,15 +11,19 @@ import java.util.Scanner;
 public class Merchant {
     Scanner scan = new Scanner(System.in);
     Screen screen = new Screen();
-    int desission;
+    private int decision;
+    private int towerFloor;
     private Player player;
+    private ItemBag merchantBag;
     ItemBag merchantBobsBag = new ItemBag();
-    private ItemBag merchantBag = merchantBobsBag;
 
-    public Merchant(Player player) {
+    public Merchant(Player player, int towerFloor) {
         this.player = player;
-        merchantBob();
-        merchantMenue(merchantBag);
+        this.towerFloor = towerFloor;
+        if (towerFloor >= 0) {
+            merchantBob();
+            merchantBag = merchantBobsBag;
+        }
 
 
     }
@@ -49,10 +56,6 @@ public class Merchant {
     }
 
 
-    public void cash() {
-
-    }
-
     public void merchantMenue(ItemBag merchantBag) {
         screen.updateScreen();
         merchantImage();
@@ -61,11 +64,15 @@ public class Merchant {
                 "\n 2. Sell Items. \n" +
                 "\n 3. Leave ");
 
-        desission = screen.optionScreen();
-        if (desission == 1) {
+        decision = screen.optionScreen();
+        if (decision == 1) {
             buyMenue(merchantBag);
-        } else if (desission == 2) {
+        } else if (decision == 2) {
             sellMenue(player.getPlayersBag());
+        } else if (decision == 3) {
+            this.player.setPlayerLocation(0);
+        } else if (decision == 0) {
+            merchantMenue(merchantBag);
         }
     }
 
@@ -77,29 +84,34 @@ public class Merchant {
                 "\n                             Your Gold: " + this.player.getGold() + "\n");
         merchantBag.showInventoryCost();
         System.out.println(" " + previousMenue + ". - Return");
-        desission = screen.optionScreen();
-        if (desission == previousMenue) {
+        decision = screen.optionScreen();
+        if (decision == previousMenue) {
             merchantMenue(merchantBag);
-        } else
+        } else if (decision == 0) {
+            buyMenue(merchantBag);
+        } else {
             buyItem(merchantBag);
+        }
+
     }
 
-    public void buyItem(ItemBag itemBag) {
-        if (this.player.getGold() > itemBag.getItem(desission - 1).cost()) {
-            this.player.removeGold(itemBag.getItem(desission - 1).cost());
-            this.player.getPlayersBag().transferItem(itemBag.getItem(desission - 1));
-            itemBag.removeItem(itemBag.getItem(desission - 1), 1);
+
+    public void buyItem(ItemBag merchantBag) {
+        if (this.player.getGold() > merchantBag.getItem(decision - 1).cost()) {
+            this.player.removeGold(merchantBag.getItem(decision - 1).cost());
+            this.player.getPlayersBag().transferItem(merchantBag.getItem(decision - 1));
+            merchantBag.removeItem(merchantBag.getItem(decision - 1), 1);
             screen.updateScreen();
-            buyMenue(itemBag);
+            buyMenue(merchantBag);
         } else {
             System.out.println("                You do NOT have enough gold you Poor bastard");
-            buyMenue(itemBag);
+            buyMenue(merchantBag);
         }
     }
 
     public void sellMenue(ItemBag playersBag) {
         screen.updateScreen();
-        if (playersBag.getInventory().size() == 0){
+        if (playersBag.getInventory().size() == 0) {
             merchantImage();
             System.out.println("    WTF is this?... Don't bullshit me! Y ou have nothing of value");
             screen.nextScreen();
@@ -111,29 +123,32 @@ public class Merchant {
                 "\n                             Your Gold: " + this.player.getGold() + "\n");
         playersBag.showInventory();
         System.out.println("\n " + previousMenue + ". - Return");
-        desission = screen.optionScreen();
-        if (desission == previousMenue) {
+        decision = screen.optionScreen();
+        if (decision == previousMenue) {
             merchantMenue(merchantBag);
-        } else
+        } else if (decision == 0) {
             sellItem(playersBag);
+        }else {
+            sellItem(playersBag);
+        }
     }
 
     public void sellItem(ItemBag playersBag) {
         screen.updateScreen();
         merchantImage();
-        System.out.println("                            " + playersBag.getItem(desission - 1).name() + "\n\n\n                        Hmmm...Ill give you " +
-                playersBag.getItem(desission - 1).cost() / 2 + "g.");
+        System.out.println("                            " + playersBag.getItem(decision - 1).name() + "\n\n\n                        Hmmm...Ill give you " +
+                playersBag.getItem(decision - 1).cost() / 2 + "g.");
         System.out.println("\n\n   1. YES \n" +
                 "\n   2. NO");
-        desission = screen.optionScreen();
-        if (desission == 1) {
-            this.player.addGold(playersBag.getItem(desission - 1).cost() / 2);
-            playersBag.removeItem(playersBag.getItem(desission - 1), 1);
+        decision = screen.optionScreen();
+        if (decision == 1) {
+            this.player.addGold(playersBag.getItem(decision - 1).cost() / 2);
+            playersBag.removeItem(playersBag.getItem(decision - 1), 1);
             sellMenue(playersBag);
-        }
-        else if (desission == 2){
+        } else if (decision == 2) {
             sellMenue(playersBag);
-
+        } else if (decision == 0) {
+            sellItem(playersBag);
         }
     }
 
@@ -142,6 +157,14 @@ public class Merchant {
         merchantBobsBag.addItem(new ManaPotion(2), 3);
 
 
+    }
+
+    public ItemBag getMerchantBag() {
+        return merchantBag;
+    }
+
+    public void setMerchantBag(ItemBag merchantBag) {
+        this.merchantBag = merchantBag;
     }
 }
 

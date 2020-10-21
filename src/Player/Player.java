@@ -6,6 +6,9 @@ import Items.ItemBag;
 public class Player {
     protected int health, mana, damage, gold, dieSize;
     protected int vitality, wisdom, strength;
+    protected int playerLocation;
+    protected int lives = 3;
+    protected boolean gameOver = false;
     protected String playerName = "nope";
     protected String playerJob ="nope";
     protected ItemBag playersBag = new ItemBag();
@@ -64,9 +67,11 @@ public class Player {
     public void setGold(int gold) {
         this.gold = gold;
     }
+
     public void addGold(int gold){
         this.gold += gold;
     }
+
     public void removeGold(int gold){
         this.gold -= gold;
     }
@@ -117,6 +122,43 @@ public class Player {
 
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+
+    public int getPlayerLocation() {
+        return playerLocation;
+    }
+    public void setPlayerLocation(int playerLocation) {
+        this.playerLocation = playerLocation;
+    }
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public int addLives(int lives){
+        return this.lives += lives;
+    }
+
+    public int minusLives(int lives){
+        return this.lives -= lives;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public boolean checkDeath(){
+        if (this.getHealth() <= 0){
+            return true;
+        }else
+            return false;
     }
 }
 

@@ -40,6 +40,10 @@ public class Enemy {
         this.damage = damage;
     }
 
+    public String getEnemyImage() {
+        return enemyImage;
+    }
+
     public int getMana() {
         return mana;
     }
@@ -54,5 +58,12 @@ public class Enemy {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean checkEnemyDeath() {
+        if (this.getHealth() <= 0) {
+            return true;
+        }else
+            return false;
     }
 }
