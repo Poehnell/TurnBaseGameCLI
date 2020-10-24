@@ -15,7 +15,7 @@ public class Player {
 
 
     public Player(int vitality, int wisdom, int strength, int gold, int dieSize) {
-        this.health = vitality * 2;
+        this.health = vitality * 5;
         this.mana = wisdom * 2;
         this.damage = strength * 2;
         this.gold = gold;
