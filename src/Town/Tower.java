@@ -64,9 +64,9 @@ public class Tower {
         } else if (decision == 3) {
             menue.menueScreen();
         } else if (decision == 4) {
-            if (this.player.getBag().findItemByType("Rope")) {
-                if (this.player.getBag().getItemByName("Rope").getQuantity() >= (this.player.getTowerFloor() / 5)) {
-                    this.player.getBag().removeItem(this.player.getBag().getItemByName("Rope"), this.player.getTowerFloor() / 5);
+            if (this.player.getItemBag().findItemByType("Rope")) {
+                if (this.player.getItemBag().getItemByName("Rope").getQuantity() >= (this.player.getTowerFloor() / 5)) {
+                    this.player.getItemBag().removeItem(this.player.getItemBag().getItemByName("Rope"), this.player.getTowerFloor() / 5);
                     this.player.addRopeFloor(1);
                     this.player.setPlayerLocation(5);
                 } else {

@@ -23,7 +23,7 @@ public class BlobHair extends Item {
 
     @Override
     public String type() {
-        return "Enemy";
+        return "Trophy";
     }
 
     @Override
@@ -37,12 +37,16 @@ public class BlobHair extends Item {
     }
 
     @Override
+    public void combatUse(Player player, Enemy enemy) {
+
+    }
+
     public void use(Player player) {
 
     }
 
     @Override
-    public void use(Enemy enemy) {
+    public void cast(Player player) {
 
     }
 }

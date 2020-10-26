@@ -23,9 +23,11 @@ public abstract class Item {
 
     public abstract boolean consumable();
 
+    public abstract void combatUse(Player player, Enemy enemy);
+
     public abstract void use(Player player);
 
-    public abstract void use(Enemy enemy);
+    public abstract void cast(Player player);
 
     public int getid() {
         return id;

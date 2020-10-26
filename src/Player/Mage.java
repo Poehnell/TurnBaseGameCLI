@@ -1,5 +1,9 @@
 package Player;
 
+import Items.Potions.ManaPotion;
+import Items.scrolls.Cure;
+import Items.scrolls.FireBall;
+
 public class Mage extends Player {
     protected String jobType = "Mage";
     protected String mageImage =
@@ -26,7 +30,10 @@ public class Mage extends Player {
             "   ░░░░░░░░░██▀▀░░░░░░░░░░░░░░░░░";
 
     public Mage() {
-        super(10, 15, 5, 100,6);
+        super(100, 100, 50, 100,6);
+        itemBag.addItem(new FireBall(201),2);
+        itemBag.addItem(new Cure(200),2);
+        itemBag.addItem(new ManaPotion(2),5);
     }
 
     public String getJobType() {

@@ -1,10 +1,11 @@
 package Town;
 
-import Items.EnemyTrophy.TrollEar;
 import Items.Potions.HealthPotion;
 import Items.ItemBag;
 import Items.Potions.ManaPotion;
 import Items.Rope;
+import Items.scrolls.Cure;
+import Items.scrolls.FireBall;
 import Main.Screen;
 import Player.Player;
 
@@ -70,7 +71,7 @@ public class Merchant {
         if (decision == 1) {
             buyMenue(merchantBag);
         } else if (decision == 2) {
-            sellMenue(player.getBag());
+            sellMenue(player.getItemBag());
         } else if (decision == 3) {
             this.player.setPlayerLocation(0);
         } else if (decision == 0) {
@@ -101,12 +102,15 @@ public class Merchant {
     public void buyItem(ItemBag merchantBag) {
         if (this.player.getGold() >= merchantBag.getItem(decision - 1).cost()) {
             this.player.removeGold(merchantBag.getItem(decision - 1).cost());
-            this.player.getBag().transferItem(merchantBag.getItem(decision - 1));
+            this.player.getItemBag().transferItem(merchantBag.getItem(decision - 1));
             merchantBag.removeItem(merchantBag.getItem(decision - 1), 1);
             screen.updateScreen();
             buyMenue(merchantBag);
         } else {
+            screen.updateScreen();
+            merchantImage();
             System.out.println("                You do NOT have enough gold you Poor bastard");
+            screen.nextScreen();
             buyMenue(merchantBag);
         }
     }
@@ -157,6 +161,8 @@ public class Merchant {
     public void merchantBob() {
         merchantBobsBag.addItem(new HealthPotion(1), 3);
         merchantBobsBag.addItem(new ManaPotion(2), 3);
+        merchantBobsBag.addItem(new Cure(200),2);
+        merchantBobsBag.addItem(new FireBall(201),1);
         merchantBobsBag.addItem(new Rope(0), 2);
 
 

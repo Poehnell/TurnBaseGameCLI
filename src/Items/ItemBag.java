@@ -102,11 +102,20 @@ public class ItemBag {
         }
 
     }
+    public void showInventoryByType(String type){
+        for (int i = 0; i <= this.inventory.size() - 1; i++){
+            if (this.inventory.get(i).type() == type){
+                System.out.println(" " + (i + 1) + ". - " + this.inventory.get(i).name());
+            }
+        }
+    }
 
     public void showInventoryConsumable() {
+        int count = 0;
         for (int i = 0; i <= this.inventory.size() - 1; i++) {
             if (this.inventory.get(i).consumable()) {
-                System.out.println(" " + (i + 1) + ". - " + this.inventory.get(i).name());
+                count++;
+                System.out.println(" " + count + ". - " + this.inventory.get(i).name() + " : " + this.inventory.get(i).getQuantity());
             }
         }
     }
@@ -144,7 +153,7 @@ public class ItemBag {
     }
 
     public Item getItemByName(String itemName) {
-        int itemIndex = 100;
+        int itemIndex = 0;
         for (int i = 0; i <= this.inventory.size() - 1; i++) {
             if (this.inventory.get(i).name() == itemName) {
                 itemIndex = i;

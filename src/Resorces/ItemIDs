@@ -1,4 +1,7 @@
-Item Id's
+Item Type and Id's
+
+// Type:
+// ID - Item Name
 
 Rope:
 0 - Rope
@@ -8,8 +11,12 @@ Potions:
 2 - Mana Potion
 
 
-Enemy Trophy
+Trophy
 101 - Goblin Ear
 102 - Troll Ear
 103 - Eyebortion Eye
 104 - Blob Hair
+
+Spell
+200 - Cure
+201 - FireBall

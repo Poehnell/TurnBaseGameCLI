@@ -2,7 +2,7 @@ package Items.EnemyTrophy;
 
 import Enemys.Enemy;
 import Items.Item;
-import Player.Player;
+import Player.*;
 
 public class TrollEar extends Item {
 
@@ -22,7 +22,7 @@ public class TrollEar extends Item {
 
     @Override
     public String type() {
-        return "Sellable";
+        return "Trophy";
     }
 
     @Override
@@ -36,12 +36,16 @@ public class TrollEar extends Item {
     }
 
     @Override
-    public void use(Player player) {
+    public void combatUse(Player player, Enemy enemy) {
 
     }
 
+    public void use(Player player) {
+    }
+
     @Override
-    public void use(Enemy enemy) {
+    public void cast(Player player) {
+
     }
 
 }

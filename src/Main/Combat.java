@@ -1,7 +1,6 @@
 package Main;
 
 import Enemys.Enemy;
-import Enemys.EnemyManager;
 import Player.Player;
 
 
@@ -50,6 +49,16 @@ public class Combat {
 
     }
 
+    public void combatOptions() {
+        System.out.print(" \n What will you do?\n" +
+                "   1. Melee attack!\n" +
+                "   2. Magic\n" +
+                "   3. Item" +
+                "\n Choose wisely : ");
+
+
+    }
+
     public void battle() {
         if (this.newEnemy.getHealth() > 0 && playerDead == false) {
             battleArena();
@@ -61,25 +70,10 @@ public class Combat {
                     winning();
                     playerTurn = false;
                     battle();
-
                 } else if (decision == 2) {
-                    if (player.getBag().getConsumableAmount() == 0) {
-                        System.out.println(" WTF you think this is a magic bag? you got nothing that can be used right now.");
-                        battle();
-                    }
-                    int previousMenue = player.getBag().getConsumableAmount() + 1;
-                    this.player.getBag().showInventoryConsumable();
-                    System.out.println("\n " + previousMenue + ". - Return");
-                    decision = screen.optionScreen();
-                    if (decision == previousMenue)
-                        battle();
-                    else if (decision == 0) {
-                        battle();
-                    } else {
-                        useItem();
-                        playerTurn = false;
-                        battle();
-                    }
+                    magicMenue();
+                } else if (decision == 3) {
+                    itemsMenue();
                 } else if (decision == 0) {
                     System.out.println("\n     Pick a number corresponding to your choice! whatever you entered is not a choice");
                     screen.nextScreen();
@@ -95,55 +89,66 @@ public class Combat {
         }
     }
 
+    public void magicMenue() {
+        if (player.getSpellBag().getInventory().size() == 0) {
+            System.out.println("\n Knock Knock.......Oh look no spells in here!");
+            screen.nextScreen();
+            battle();
+        } else {
+            screen.updateScreen();
+            battleArena();
+            System.out.println("\n                MAGIC \n");
+            int previousMenue = player.getSpellBag().getInventory().size() + 1;
+            this.player.getSpellBag().showInventoryByType("Spell");
+            System.out.println("\n " + previousMenue + ". - Return");
+            decision = screen.optionScreen();
+            if (decision == previousMenue) {
+                battle();
+            } else if (decision == 0) {
+                battle();
+            } else {
+                castSpell();
+                playerTurn = false;
+                winning();
+                screen.nextScreen();
+                battle();
+            }
+        }
+    }
+
+
+    public void itemsMenue() {
+        if (player.getItemBag().getConsumableAmount() == 0) {
+            System.out.println(" WTF you think this is a magic bag? you got nothing that can be used right now.");
+            screen.nextScreen();
+            battle();
+        }
+        screen.updateScreen();
+        battleArena();
+        System.out.println("\n                ITEMS \n");
+        int previousMenue = player.getItemBag().getConsumableAmount() + 1;
+        this.player.getItemBag().showInventoryConsumable();
+        System.out.println("\n " + previousMenue + ". - Return");
+        decision = screen.optionScreen();
+        if (decision == previousMenue) {
+            battle();
+        } else if (decision == 0) {
+            battle();
+        } else {
+            useItem();
+            winning();
+            screen.nextScreen();
+            playerTurn = false;
+            battle();
+        }
+
+    }
 
     public void battleArena() {
         screen.updateScreen();
         gameBoard.drawGameBoard(this.newEnemy, this.player);
 
     }
-
-
-    public void winning() {
-        if (this.newEnemy.checkEnemyDeath()) {
-            screen.victory();
-            System.out.println("\n\n       Fuck ya bud you just beat up the little " + this.newEnemy.getName());
-            this.newEnemy.getBag().showInventoryAll();
-            this.player.getBag().transferAllItem(this.newEnemy.getBag());
-            screen.nextScreen();
-            this.player.addTowerFloor(1);
-            if (this.player.getTowerFloor() % 5 == 0) {
-                this.player.setPlayerLocation(4);
-            } else {
-                this.player.setPlayerLocation(3);
-            }
-        }
-    }
-
-    public void died() {
-        if (this.player.checkDeath() && player.getLives() > 0) {
-            screen.youAreDead();
-            player.minusLives(1);
-            this.player.setHealth(1);
-            this.player.setTowerFloor(1);
-            this.player.setPlayerLocation(0);
-            playerDead = true;
-        } else if (this.player.getLives() <= 0) {
-            this.player.setGameOver(true);
-            playerDead = true;
-
-        }
-    }
-
-
-    public void combatOptions() {
-        System.out.print(" \n What will you do?\n" +
-                "   1. Melee attack!\n" +
-                "   2. Item\n" +
-                "\n Choose wisely : ");
-
-
-    }
-
 
     public void playerMeleeAttack() {
         this.newDice.rollDice(this.player.getDieSize());
@@ -193,8 +198,42 @@ public class Combat {
     }
 
     public void useItem() {
-        this.player.getBag().getItem(decision - 1).use(this.player);
-        this.player.getBag().removeItem(player.getBag().getItem(decision - 1), 1);
+        this.player.getItemBag().getItem(decision - 1).combatUse(this.player, this.newEnemy);
+        this.player.getItemBag().removeItem(player.getItemBag().getItem(decision - 1), 1);
     }
 
+    public void castSpell() {
+        this.player.getSpellBag().getItem(decision - 1).combatUse(this.player, this.newEnemy);
+    }
+
+    public void winning() {
+        if (this.newEnemy.checkEnemyDeath()) {
+            screen.victory();
+            System.out.println("\n\n       Fuck ya bud you just beat up the little " + this.newEnemy.getName());
+            this.newEnemy.getBag().showInventoryAll();
+            this.player.getItemBag().transferAllItem(this.newEnemy.getBag());
+            screen.nextScreen();
+            this.player.addTowerFloor(1);
+            if (this.player.getTowerFloor() % 5 == 0) {
+                this.player.setPlayerLocation(4);
+            } else {
+                this.player.setPlayerLocation(3);
+            }
+        }
+    }
+
+    public void died() {
+        if (this.player.checkDeath() && player.getLives() > 0) {
+            screen.youAreDead();
+            player.minusLives(1);
+            this.player.setHealth(1);
+            this.player.setTowerFloor(1);
+            this.player.setPlayerLocation(0);
+            playerDead = true;
+        } else if (this.player.getLives() <= 0) {
+            this.player.setGameOver(true);
+            playerDead = true;
+
+        }
+    }
 }

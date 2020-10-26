@@ -35,6 +35,12 @@ public class Enemy {
         this.health = health;
     }
 
+    public int addHealth(int health){
+        return this.health += health;
+    }
+public int minusHealth(int health){
+        return this.health -= health;
+}
     public int getDamage() {
         return damage;
     }

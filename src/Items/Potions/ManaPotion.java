@@ -5,7 +5,7 @@ import Items.Item;
 import Player.Player;
 
 public class ManaPotion extends Item {
-    private int addMana = 10;
+    private int addMana = 50;
 
 
 
@@ -42,12 +42,19 @@ public class ManaPotion extends Item {
 
 
     @Override
-    public void use(Player player) {
+    public void combatUse(Player player, Enemy enemy) {
+        player.addMana(addMana);
 
     }
 
     @Override
-    public void use(Enemy enemy) {
+    public void use(Player player) {
+        player.addMana(addMana);
+
+    }
+
+    @Override
+    public void cast(Player player) {
 
     }
 }

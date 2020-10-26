@@ -4,15 +4,17 @@ import Items.ItemBag;
 import Main.Screen;
 
 public class Player {
-    protected int health, mana, damage, gold, dieSize,towerFloor,ropeFloor;
+    protected int health, mana, damage, gold, dieSize, towerFloor, ropeFloor;
     protected int vitality, wisdom, strength;
     protected int playerLocation;
     protected int decission;
     protected int lives = 3;
     protected boolean gameOver = false;
+    protected boolean inCombat = false;
     protected String playerName = "nope";
     protected String playerJob = "nope";
-    protected ItemBag bag = new ItemBag();
+    protected ItemBag itemBag = new ItemBag();
+    protected ItemBag spellBag = new ItemBag();
     Screen screen = new Screen();
 
 
@@ -37,13 +39,17 @@ public class Player {
         this.dieSize = dieSize;
     }
 
-    public ItemBag getBag() {
-        return bag;
+    public ItemBag getItemBag() {
+        return itemBag;
     }
 
 
-    public void setBag(ItemBag bag) {
-        this.bag = bag;
+    public void setItemBag(ItemBag itemBag) {
+        this.itemBag = itemBag;
+    }
+
+    public ItemBag getSpellBag() {
+        return spellBag;
     }
 
     public String getPlayerName() {
@@ -104,6 +110,22 @@ public class Player {
 
     public void setMana(int mana) {
         this.mana = mana;
+    }
+
+    public int addMana(int mana) {
+        if (this.mana + mana > wisdom * 2) {
+            return this.mana = wisdom * 2;
+        } else {
+            return this.mana += mana;
+        }
+    }
+
+    public int minusMana(int mana) {
+        if (this.mana - mana < 0) {
+            return this.mana = 0;
+        } else {
+            return this.mana -= mana;
+        }
     }
 
     public int getDamage() {
@@ -170,14 +192,15 @@ public class Player {
         this.towerFloor = towerFloor;
     }
 
-    public int addTowerFloor(int addFloor){
+    public int addTowerFloor(int addFloor) {
         return this.towerFloor += addFloor;
     }
 
     public int getRopeFloor() {
         return ropeFloor;
     }
-    public int addRopeFloor(int addFloor){
+
+    public int addRopeFloor(int addFloor) {
         return this.ropeFloor += addFloor;
     }
 
@@ -191,6 +214,14 @@ public class Player {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public boolean isInCombat() {
+        return inCombat;
+    }
+
+    public void setInCombat(boolean inCombat) {
+        this.inCombat = inCombat;
     }
 
     public boolean checkDeath() {

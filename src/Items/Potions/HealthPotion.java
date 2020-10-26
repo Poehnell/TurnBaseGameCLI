@@ -40,13 +40,17 @@ public class HealthPotion extends Item {
     }
 
     @Override
-    public void use(Player player) {
+    public void combatUse(Player player, Enemy enemy) {
         player.addHealth(addHealth);
 
     }
 
+    public void use(Player player) {
+        player.addHealth(addHealth);
+    }
+
     @Override
-    public void use(Enemy enemy) {
+    public void cast(Player player) {
 
     }
 }
