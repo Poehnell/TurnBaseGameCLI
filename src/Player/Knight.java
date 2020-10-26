@@ -26,7 +26,7 @@ public class Knight extends Player {
             "   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 
     public Knight() {
-        super(15, 5, 10, 100, 6);
+        super(30, 5, 30, 100, 6);
     }
 
     public String getJobType() {

@@ -1,21 +1,23 @@
 package Player;
 
-import Items.Item;
 import Items.ItemBag;
+import Main.Screen;
 
 public class Player {
-    protected int health, mana, damage, gold, dieSize;
+    protected int health, mana, damage, gold, dieSize,towerFloor,ropeFloor;
     protected int vitality, wisdom, strength;
     protected int playerLocation;
+    protected int decission;
     protected int lives = 3;
     protected boolean gameOver = false;
     protected String playerName = "nope";
-    protected String playerJob ="nope";
-    protected ItemBag playersBag = new ItemBag();
+    protected String playerJob = "nope";
+    protected ItemBag bag = new ItemBag();
+    Screen screen = new Screen();
 
 
     public Player(int vitality, int wisdom, int strength, int gold, int dieSize) {
-        this.health = vitality * 5;
+        this.health = vitality * 2;
         this.mana = wisdom * 2;
         this.damage = strength * 2;
         this.gold = gold;
@@ -23,7 +25,6 @@ public class Player {
         this.wisdom = wisdom;
         this.strength = strength;
         this.dieSize = dieSize;
-
 
 
     }
@@ -36,12 +37,13 @@ public class Player {
         this.dieSize = dieSize;
     }
 
-    public ItemBag getPlayersBag() {
-        return playersBag;
+    public ItemBag getBag() {
+        return bag;
     }
 
-    public void setPlayersBag(ItemBag playersBag) {
-        this.playersBag = playersBag;
+
+    public void setBag(ItemBag bag) {
+        this.bag = bag;
     }
 
     public String getPlayerName() {
@@ -68,11 +70,11 @@ public class Player {
         this.gold = gold;
     }
 
-    public void addGold(int gold){
+    public void addGold(int gold) {
         this.gold += gold;
     }
 
-    public void removeGold(int gold){
+    public void removeGold(int gold) {
         this.gold -= gold;
     }
 
@@ -82,6 +84,18 @@ public class Player {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int addHealth(int health) {
+        if (this.health + health > vitality * 2) {
+            return this.health = vitality * 2;
+        } else {
+            return this.health += health;
+        }
+    }
+
+    public int minusHealth(int health) {
+        return this.health -= health;
     }
 
     public int getMana() {
@@ -127,9 +141,11 @@ public class Player {
     public int getPlayerLocation() {
         return playerLocation;
     }
+
     public void setPlayerLocation(int playerLocation) {
         this.playerLocation = playerLocation;
     }
+
     public int getLives() {
         return lives;
     }
@@ -138,12 +154,35 @@ public class Player {
         this.lives = lives;
     }
 
-    public int addLives(int lives){
+    public int addLives(int lives) {
         return this.lives += lives;
     }
 
-    public int minusLives(int lives){
+    public int minusLives(int lives) {
         return this.lives -= lives;
+    }
+
+    public int getTowerFloor() {
+        return towerFloor;
+    }
+
+    public void setTowerFloor(int towerFloor) {
+        this.towerFloor = towerFloor;
+    }
+
+    public int addTowerFloor(int addFloor){
+        return this.towerFloor += addFloor;
+    }
+
+    public int getRopeFloor() {
+        return ropeFloor;
+    }
+    public int addRopeFloor(int addFloor){
+        return this.ropeFloor += addFloor;
+    }
+
+    public void setRopeFloor(int ropeFloor) {
+        this.ropeFloor = ropeFloor;
     }
 
     public boolean isGameOver() {
@@ -154,10 +193,10 @@ public class Player {
         this.gameOver = gameOver;
     }
 
-    public boolean checkDeath(){
-        if (this.getHealth() <= 0){
+    public boolean checkDeath() {
+        if (this.getHealth() <= 0) {
             return true;
-        }else
+        } else
             return false;
     }
 }

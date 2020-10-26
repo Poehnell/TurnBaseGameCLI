@@ -1,7 +1,7 @@
 package Main;
 
 import Player.ClassCreator;
-import Player.Player;
+import Player.*;
 import Town.*;
 
 import javax.sound.sampled.AudioInputStream;
@@ -12,6 +12,7 @@ import java.io.File;
 public class GameSetup {
 
     private Player newPlayer;
+    private Menue menue;
     private int decision;
     Screen screen = new Screen();
 
@@ -23,9 +24,10 @@ public class GameSetup {
         screen.intro();
         PlayerInitiator initiator = new PlayerInitiator();
         this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
+        this.menue = new Menue(this.newPlayer);
         Town town = new Town(this.newPlayer);
-        Tower tower = new Tower(this.newPlayer);
-        Merchant merchant = new Merchant(this.newPlayer,tower.getFloor());
+        Tower tower = new Tower(this.newPlayer, this.menue);
+        Merchant merchant = new Merchant(this.newPlayer);
 
         while (!this.newPlayer.isGameOver()){
             if (this.newPlayer.getPlayerLocation() == 0){
@@ -34,6 +36,12 @@ public class GameSetup {
                 merchant.merchantMenue(merchant.getMerchantBag());
             }else if (this.newPlayer.getPlayerLocation() == 2){
                 tower.mainFloor();
+            }else if (this.newPlayer.getPlayerLocation() == 3){
+                tower.upperFloor();
+            }else if (this.newPlayer.getPlayerLocation() == 4){
+                tower.ropeFloor();
+            }else if (this.newPlayer.getPlayerLocation() == 5){
+                tower.ropeFloorWithRope();
             }
         }
         gameOver();

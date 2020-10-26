@@ -1,7 +1,10 @@
 package Items;
 
 
-public abstract class Item implements Cloneable {
+import Enemys.Enemy;
+import Player.Player;
+
+public abstract class Item {
 
     private int quantity = 0;
     private int id = 0;
@@ -17,6 +20,12 @@ public abstract class Item implements Cloneable {
     public abstract String type();
 
     public abstract Item create();
+
+    public abstract boolean consumable();
+
+    public abstract void use(Player player);
+
+    public abstract void use(Enemy enemy);
 
     public int getid() {
         return id;

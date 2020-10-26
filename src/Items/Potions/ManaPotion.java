@@ -1,6 +1,10 @@
-package Items;
+package Items.Potions;
 
-public class ManaPotion extends Potions {
+import Enemys.Enemy;
+import Items.Item;
+import Player.Player;
+
+public class ManaPotion extends Item {
     private int addMana = 10;
 
 
@@ -9,10 +13,6 @@ public class ManaPotion extends Potions {
         this.setid(id);
     }
 
-    @Override
-    public int drinkPotion() {
-        return addMana;
-    }
 
     @Override
     public String name() {
@@ -35,7 +35,21 @@ public class ManaPotion extends Potions {
         return new ManaPotion(2);
     }
 
+    @Override
+    public boolean consumable() {
+        return true;
+    }
 
+
+    @Override
+    public void use(Player player) {
+
+    }
+
+    @Override
+    public void use(Enemy enemy) {
+
+    }
 }
 
 

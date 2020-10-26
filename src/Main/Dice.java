@@ -9,6 +9,10 @@ public class Dice {
     public Dice() {
     }
 
+    public int getDiceRoll() {
+        return diceRoll;
+    }
+
     public void rollDice(int diceSize) {
         this.diceRoll = random.nextInt(diceSize) + 1;
     }

@@ -1,6 +1,11 @@
 package Enemys;
 
+import Items.EnemyTrophy.TrollEar;
+import Items.Potions.HealthPotion;
+import Main.Dice;
+
 public class Troll extends Enemy {
+    private Dice newDice = new Dice();
 
 
 
@@ -28,6 +33,10 @@ public class Troll extends Enemy {
                 "░░░░░░░░░░░░█░░░░░▀█▀▄▄▄▄█▀░░░░░░░░░░\n" +
                 "░░░░░░░░░░░░░█░░░▄▄▌░░░░░░░░░░░░░░░░░\n",100,10,15, 6);
         System.out.println(this.enemyImage);
+        bag.addItem(new TrollEar(102),1);
+        newDice.rollDice(dieSize);
+        //if (this.newDice.getDiceRoll() > 1);
+        bag.addItem(new HealthPotion(1),1);
     }
 
 

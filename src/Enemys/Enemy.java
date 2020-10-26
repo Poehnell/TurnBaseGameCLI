@@ -1,10 +1,13 @@
 package Enemys;
 
 
+import Items.ItemBag;
+
 public class Enemy {
     protected int health, damage, mana, dieSize;
     protected String name = "";
     protected String enemyImage = "";
+    protected ItemBag bag = new ItemBag();
 
 
     public Enemy(String name, String enemyImage, int health, int damage, int mana, int dieSize) {
@@ -43,7 +46,13 @@ public class Enemy {
     public String getEnemyImage() {
         return enemyImage;
     }
+    public ItemBag getBag() {
+        return bag;
+    }
 
+    public void setBag(ItemBag bag) {
+        this.bag = bag;
+    }
     public int getMana() {
         return mana;
     }

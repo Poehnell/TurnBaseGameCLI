@@ -3,7 +3,6 @@ package Main;
 import Enemys.Enemy;
 import Enemys.EnemyManager;
 import Player.Player;
-import Town.Town;
 
 
 import java.util.Scanner;
@@ -16,17 +15,15 @@ public class Combat {
     GameBoard gameBoard = new GameBoard();
     Screen screen = new Screen();
     private int decision;
-    private int towerFloor;
     private boolean playerTurn = true;
+    private boolean playerDead = false;
 
 
-    public Combat(Player player, Enemy newEnemy, int towerFloor) {
+    public Combat(Player player, Enemy newEnemy) {
         this.player = player;
         this.newEnemy = newEnemy;
-        this.towerFloor = towerFloor;
         screen.updateScreen();
         initiateCombat();
-        battle();
     }
 
 
@@ -42,46 +39,62 @@ public class Combat {
             System.out.println("Dice roll " + this.newDice.diceRoll);
             System.out.println("\nYou don't hesitate and land the first strike!");
             screen.nextScreen();
+            battle();
         } else if (newDice.diceRoll <= 4) {
             screen.updateScreen();
             System.out.println(newEnemy.getEnemyImage());
             System.out.println("\n As the " + this.newEnemy.getName() + " draws near, you lock eyes with the beast.\n");
             screen.nextScreen();
+            battle();
         }
 
     }
 
     public void battle() {
-        if (!loosing()) {
-            if (this.newEnemy.getHealth() > 0) {
-                battleArena();
-                if (playerTurn) {
-                    combatOptions();
-                    decision = scan.nextInt();
-                    if (decision == 1) {
-                        playerMeleeAttack();
-                        winning();
+        if (this.newEnemy.getHealth() > 0 && playerDead == false) {
+            battleArena();
+            if (playerTurn) {
+                combatOptions();
+                decision = scan.nextInt();
+                if (decision == 1) {
+                    playerMeleeAttack();
+                    winning();
+                    playerTurn = false;
+                    battle();
+
+                } else if (decision == 2) {
+                    if (player.getBag().getConsumableAmount() == 0) {
+                        System.out.println(" WTF you think this is a magic bag? you got nothing that can be used right now.");
+                        battle();
+                    }
+                    int previousMenue = player.getBag().getConsumableAmount() + 1;
+                    this.player.getBag().showInventoryConsumable();
+                    System.out.println("\n " + previousMenue + ". - Return");
+                    decision = screen.optionScreen();
+                    if (decision == previousMenue)
+                        battle();
+                    else if (decision == 0) {
+                        battle();
+                    } else {
+                        useItem();
                         playerTurn = false;
                         battle();
-
-                    } else if (decision == 2) {
-                        System.out.println("\n     You Have no Items you poor bastard!");
-                        screen.nextScreen();
-                        loosing();
-                        battle();
-
-                    } else if (decision == 0)
-                        System.out.println("\n     Pick a number corresponding to your choice! whatever you entered is not a choice");
+                    }
+                } else if (decision == 0) {
+                    System.out.println("\n     Pick a number corresponding to your choice! whatever you entered is not a choice");
                     screen.nextScreen();
                     battle();
-                } else if (!playerTurn) {
-                    enemyAttack();
-                    playerTurn = true;
-                    battle();
                 }
+
+            } else if (!playerTurn) {
+                enemyAttack();
+                died();
+                playerTurn = true;
+                battle();
             }
         }
     }
+
 
     public void battleArena() {
         screen.updateScreen();
@@ -94,37 +107,31 @@ public class Combat {
         if (this.newEnemy.checkEnemyDeath()) {
             screen.victory();
             System.out.println("\n\n       Fuck ya bud you just beat up the little " + this.newEnemy.getName());
+            this.newEnemy.getBag().showInventoryAll();
+            this.player.getBag().transferAllItem(this.newEnemy.getBag());
             screen.nextScreen();
-            screen.upperFloor();
-            decision = screen.optionScreen();
-            if (decision == 1) {
-                this.player.setPlayerLocation(0);
-                towerFloor = 1;
-            } else if (decision == 2) {
-                towerFloor++;
-                this.newEnemy = new EnemyManager().getNewEnemy();
-                new Combat(this.player, this.newEnemy, this.towerFloor);
-
-            } else if (decision == 0) {
-                winning();
+            this.player.addTowerFloor(1);
+            if (this.player.getTowerFloor() % 5 == 0) {
+                this.player.setPlayerLocation(4);
+            } else {
+                this.player.setPlayerLocation(3);
             }
         }
     }
 
-    public boolean loosing() {
+    public void died() {
         if (this.player.checkDeath() && player.getLives() > 0) {
             screen.youAreDead();
             player.minusLives(1);
             this.player.setHealth(1);
-            towerFloor = 1;
+            this.player.setTowerFloor(1);
             this.player.setPlayerLocation(0);
-            return true;
+            playerDead = true;
         } else if (this.player.getLives() <= 0) {
             this.player.setGameOver(true);
-            return true;
+            playerDead = true;
 
         }
-        return false;
     }
 
 
@@ -185,5 +192,9 @@ public class Combat {
         }
     }
 
+    public void useItem() {
+        this.player.getBag().getItem(decision - 1).use(this.player);
+        this.player.getBag().removeItem(player.getBag().getItem(decision - 1), 1);
+    }
 
 }

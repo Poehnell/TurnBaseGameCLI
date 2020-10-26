@@ -1,8 +1,10 @@
 package Town;
 
-import Items.HealthPotion;
+import Items.EnemyTrophy.TrollEar;
+import Items.Potions.HealthPotion;
 import Items.ItemBag;
-import Items.ManaPotion;
+import Items.Potions.ManaPotion;
+import Items.Rope;
 import Main.Screen;
 import Player.Player;
 
@@ -17,7 +19,7 @@ public class Merchant {
     private ItemBag merchantBag;
     ItemBag merchantBobsBag = new ItemBag();
 
-    public Merchant(Player player, int towerFloor) {
+    public Merchant(Player player) {
         this.player = player;
         this.towerFloor = towerFloor;
         if (towerFloor >= 0) {
@@ -68,7 +70,7 @@ public class Merchant {
         if (decision == 1) {
             buyMenue(merchantBag);
         } else if (decision == 2) {
-            sellMenue(player.getPlayersBag());
+            sellMenue(player.getBag());
         } else if (decision == 3) {
             this.player.setPlayerLocation(0);
         } else if (decision == 0) {
@@ -97,9 +99,9 @@ public class Merchant {
 
 
     public void buyItem(ItemBag merchantBag) {
-        if (this.player.getGold() > merchantBag.getItem(decision - 1).cost()) {
+        if (this.player.getGold() >= merchantBag.getItem(decision - 1).cost()) {
             this.player.removeGold(merchantBag.getItem(decision - 1).cost());
-            this.player.getPlayersBag().transferItem(merchantBag.getItem(decision - 1));
+            this.player.getBag().transferItem(merchantBag.getItem(decision - 1));
             merchantBag.removeItem(merchantBag.getItem(decision - 1), 1);
             screen.updateScreen();
             buyMenue(merchantBag);
@@ -121,7 +123,7 @@ public class Merchant {
         merchantImage();
         System.out.println("    HA! like you have anything i would want. show me your shit! \n" +
                 "\n                             Your Gold: " + this.player.getGold() + "\n");
-        playersBag.showInventory();
+        playersBag.showInventoryAll();
         System.out.println("\n " + previousMenue + ". - Return");
         decision = screen.optionScreen();
         if (decision == previousMenue) {
@@ -155,6 +157,7 @@ public class Merchant {
     public void merchantBob() {
         merchantBobsBag.addItem(new HealthPotion(1), 3);
         merchantBobsBag.addItem(new ManaPotion(2), 3);
+        merchantBobsBag.addItem(new Rope(0), 2);
 
 
     }
