@@ -34,9 +34,9 @@ public class Goblin extends Enemy{
                 "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n" +
                 "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n", 80,10,10, 6);
         System.out.println(this.enemyImage);
-        bag.addItem(new GoblinEar(101),1);
+        bag.addItem(new GoblinEar(101),2);
         newDice.rollDice(dieSize);
-        //if (this.newDice.getDiceRoll() > 1);
+        if (this.newDice.getDiceRoll() > 2);
         bag.addItem(new HealthPotion(1),1);
     }
 

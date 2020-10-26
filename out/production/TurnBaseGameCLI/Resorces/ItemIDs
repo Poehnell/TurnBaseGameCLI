@@ -1,5 +1,8 @@
 Item Id's
 
+Rope:
+0 - Rope
+
 Potions:
 1 - Health Potion
 2 - Mana Potion
@@ -8,3 +11,5 @@ Potions:
 Enemy Trophy
 101 - Goblin Ear
 102 - Troll Ear
+103 - Eyebortion Eye
+104 - Blob Hair

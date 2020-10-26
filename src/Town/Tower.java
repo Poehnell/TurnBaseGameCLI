@@ -26,7 +26,7 @@ public class Tower {
         if (decision == 1) {
             this.player.setPlayerLocation(0);
         } else if (decision == 2) {
-            this.enemy = new EnemyManager().getNewEnemy();
+            this.enemy = new EnemyManager(this.player).getNewEnemy();
             new Combat(this.player, this.enemy).battle();
         } else if (decision == 3) {
             menue.menueScreen();
@@ -42,7 +42,7 @@ public class Tower {
         if (decision == 1) {
             this.player.setPlayerLocation(0);
         } else if (decision == 2) {
-            this.enemy = new EnemyManager().getNewEnemy();
+            this.enemy = new EnemyManager(this.player).getNewEnemy();
             new Combat(this.player, this.enemy).battle();
         } else if (decision == 3) {
             menue.menueScreen();
@@ -59,7 +59,7 @@ public class Tower {
             this.player.setTowerFloor(1);
         } else if (decision == 2) {
             this.player.addTowerFloor(1);
-            this.enemy = new EnemyManager().getNewEnemy();
+            this.enemy = new EnemyManager(this.player).getNewEnemy();
             new Combat(this.player, this.enemy);
         } else if (decision == 3) {
             menue.menueScreen();
@@ -92,7 +92,7 @@ public class Tower {
         if (decision == 1) {
             this.player.setPlayerLocation(0);
         } else if (decision == 2) {
-            this.enemy = new EnemyManager().getNewEnemy();
+            this.enemy = new EnemyManager(this.player).getNewEnemy();
             new Combat(this.player, this.enemy).battle();
         } else if (decision == 3) {
             menue.menueScreen();
