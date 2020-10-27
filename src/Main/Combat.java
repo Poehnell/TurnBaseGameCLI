@@ -54,7 +54,7 @@ public class Combat {
                 "   1. Melee attack!\n" +
                 "   2. Magic\n" +
                 "   3. Item" +
-                "\n Choose wisely : ");
+                "\n\n Choose wisely : ");
 
 
     }
@@ -91,7 +91,11 @@ public class Combat {
 
     public void magicMenue() {
         if (player.getSpellBag().getInventory().size() == 0) {
-            System.out.println("\n Knock Knock.......Oh look no spells in here!");
+            System.out.println("\n Knock Knock.......Who's there?");
+            screen.nextScreen();
+            screen.updateScreen();
+            battleArena();
+            System.out.println("\n\n No spells in here! That's who!");
             screen.nextScreen();
             battle();
         } else {
@@ -109,8 +113,8 @@ public class Combat {
             } else {
                 castSpell();
                 playerTurn = false;
-                winning();
                 screen.nextScreen();
+                winning();
                 battle();
             }
         }
@@ -203,7 +207,7 @@ public class Combat {
     }
 
     public void castSpell() {
-        this.player.getSpellBag().getItem(decision - 1).combatUse(this.player, this.newEnemy);
+        this.player.getSpellBag().getItem(decision - 1).combatCast(this.player, this.newEnemy);
     }
 
     public void winning() {

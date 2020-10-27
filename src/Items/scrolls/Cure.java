@@ -41,10 +41,16 @@ public class Cure extends Item {
     @Override
     public void combatUse(Player player, Enemy enemy) {
         player.addHealth(heal);
-        player.minusMana(manaCost);
         System.out.println("                        Your heal for " + heal);
 
 
+    }
+
+    @Override
+    public void combatCast(Player player, Enemy enemy) {
+        player.addHealth(heal);
+        player.minusMana(manaCost);
+        System.out.println("                        Your heal for " + heal);
     }
 
     public void use(Player player) {

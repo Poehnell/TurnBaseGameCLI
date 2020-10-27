@@ -2,7 +2,7 @@ package Items.EnemyTrophy;
 
 import Enemys.Enemy;
 import Items.Item;
-import Player.Player;
+import Player.*;
 
 public class BlobHair extends Item {
 
@@ -38,6 +38,11 @@ public class BlobHair extends Item {
 
     @Override
     public void combatUse(Player player, Enemy enemy) {
+
+    }
+
+    @Override
+    public void combatCast(Player player, Enemy enemy) {
 
     }
 

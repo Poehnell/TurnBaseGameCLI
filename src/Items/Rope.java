@@ -40,6 +40,11 @@ public class Rope extends Item{
     }
 
     @Override
+    public void combatCast(Player player, Enemy enemy) {
+
+    }
+
+    @Override
     public void use(Player player) {
         player.addRopeFloor(1);
     }

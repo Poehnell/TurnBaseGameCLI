@@ -2,7 +2,7 @@ package Items;
 
 
 import Enemys.Enemy;
-import Player.Player;
+import Player.*;
 
 public abstract class Item {
 
@@ -24,6 +24,7 @@ public abstract class Item {
     public abstract boolean consumable();
 
     public abstract void combatUse(Player player, Enemy enemy);
+    public abstract void combatCast(Player player, Enemy enemy);
 
     public abstract void use(Player player);
 

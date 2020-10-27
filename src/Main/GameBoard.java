@@ -39,9 +39,9 @@ public class GameBoard {
                 } else if (i == gameBoard.length / 2 + 1 && k == gameBoard[i].length / 2 + 6) {
                     System.out.print(this.player.getPlayerName());
                 } else if (i == gameBoard.length / 2 + 2 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("HP : " + this.player.getHealth());
+                    System.out.print("HP : " + this.player.getHealth() + " / " + (this.player.getVitality() * 2));
                 } else if (i == gameBoard.length / 2 + 3 && k == gameBoard[i].length / 2 + 2) {
-                    System.out.print("MP : " + this.player.getMana());
+                    System.out.print("MP : " + this.player.getMana() + " / " + (this.player.getWisdom() * 2));
 
                 } else if (i == gameBoard.length - 2 && k == gameBoard[i].length / 4) {
                     System.out.print('H');

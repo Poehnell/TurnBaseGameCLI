@@ -1,7 +1,6 @@
 package Items.EnemyTrophy;
 
 import Enemys.Enemy;
-import Enemys.EyeBortion;
 import Items.Item;
 import Player.*;
 
@@ -41,6 +40,11 @@ public class EyebortionEye extends Item {
 
     @Override
     public void combatUse(Player player, Enemy enemy) {
+
+    }
+
+    @Override
+    public void combatCast(Player player, Enemy enemy) {
 
     }
 

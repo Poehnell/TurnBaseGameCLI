@@ -40,9 +40,15 @@ public class FireBall extends Item {
     @Override
     public void combatUse(Player player, Enemy enemy) {
         enemy.minusHealth(damage);
-        player.minusMana(manaCost);
         System.out.println("               KABOOM! you hit the " + enemy.getName() + "for " + damage + " Fire damage");
 
+    }
+
+    @Override
+    public void combatCast(Player player, Enemy enemy) {
+        enemy.minusHealth(damage);
+        player.minusMana(manaCost);
+        System.out.println("               KABOOM! you hit the " + enemy.getName() + "for " + damage + " Fire damage");
     }
 
 

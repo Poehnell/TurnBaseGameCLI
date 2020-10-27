@@ -48,6 +48,11 @@ public class ManaPotion extends Item {
     }
 
     @Override
+    public void combatCast(Player player, Enemy enemy) {
+
+    }
+
+    @Override
     public void use(Player player) {
         player.addMana(addMana);
 
