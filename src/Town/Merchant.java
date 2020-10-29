@@ -65,7 +65,8 @@ public class Merchant {
         System.out.println("\n                   What the fuck do you want? \n" +
                 "\n 1. Buy Items. \n" +
                 "\n 2. Sell Items. \n" +
-                "\n 3. Leave ");
+                "\n 3. Go in the back to pose for the greasy Merchant \n" +
+                "\n 4. Leave ");
 
         decision = screen.optionScreen();
         if (decision == 1) {
@@ -73,8 +74,10 @@ public class Merchant {
         } else if (decision == 2) {
             sellMenue(player.getItemBag());
         } else if (decision == 3) {
+            this.player.setPlayerLocation(6);
+        } else if (decision == 4) {
             this.player.setPlayerLocation(0);
-        } else if (decision == 0) {
+        }else if (decision == 0) {
             merchantMenue(merchantBag);
         }
     }

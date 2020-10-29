@@ -4,7 +4,9 @@ package Items;
 import Enemys.Enemy;
 import Player.*;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
 
     private int quantity = 0;
     private int id = 0;

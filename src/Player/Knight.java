@@ -1,6 +1,8 @@
 package Player;
 
-public class Knight extends Player {
+import java.io.Serializable;
+
+public class Knight extends Player implements Serializable {
     protected String jobType = "Knight";
     protected String knightImage =
             "            1. Knight:           \n" +

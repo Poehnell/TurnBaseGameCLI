@@ -10,11 +10,13 @@ public class ClassCreator {
         if (playerChoice == "Knight") {
             this.playerJob = new Knight();
             playerJob.setPlayerName(playerName);
+            playerJob.setPlayerJob(playerChoice);
 
 
         } else if (playerChoice == "Mage") {
             this.playerJob = new Mage();
             playerJob.setPlayerName(playerName);
+            playerJob.setPlayerJob(playerChoice);
         }
     }
 

@@ -52,6 +52,10 @@ public class Player {
         return spellBag;
     }
 
+    public void setSpellBag(ItemBag spellBag) {
+        this.spellBag = spellBag;
+    }
+
     public String getPlayerName() {
         return playerName;
     }

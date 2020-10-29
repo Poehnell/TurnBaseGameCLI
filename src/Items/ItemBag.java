@@ -1,9 +1,10 @@
 package Items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class ItemBag {
+public class ItemBag implements Serializable {
 
 
     private ArrayList<Item> inventory = new ArrayList<Item>();

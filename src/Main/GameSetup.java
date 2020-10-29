@@ -7,9 +7,9 @@ import Town.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.File;
+import java.io.*;
 
-public class GameSetup {
+public class GameSetup implements Serializable {
 
     private Player newPlayer;
     private Menue menue;
@@ -22,12 +22,12 @@ public class GameSetup {
 
         playMusic("music.wav");
         screen.intro();
-        PlayerInitiator initiator = new PlayerInitiator();
-        this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
+        newOrContinue();
         this.menue = new Menue(this.newPlayer);
         Town town = new Town(this.newPlayer);
         Tower tower = new Tower(this.newPlayer, this.menue);
         Merchant merchant = new Merchant(this.newPlayer);
+        Save save = new Save(this.newPlayer);
 
         while (!this.newPlayer.isGameOver()){
             if (this.newPlayer.getPlayerLocation() == 0){
@@ -42,6 +42,9 @@ public class GameSetup {
                 tower.ropeFloor();
             }else if (this.newPlayer.getPlayerLocation() == 5){
                 tower.ropeFloorWithRope();
+            }else if (this.newPlayer.getPlayerLocation() == 6){
+                save.saveDungeon();
+
             }
         }
         gameOver();
@@ -83,4 +86,19 @@ public class GameSetup {
             ex.printStackTrace();
         }
     }
+
+    public void newOrContinue(){
+        Save save = new Save();
+        decision = screen.optionScreen();
+        if (decision == 1){
+            PlayerInitiator initiator = new PlayerInitiator();
+            this.newPlayer = new ClassCreator(initiator.getPlayerChoice(), initiator.getPlayerName()).getPlayerJob();
+
+        }else if (decision == 2){
+            save.loadDungeon();
+            this.newPlayer = save.getPlayer();
+
+        }
+    }
+
 }
