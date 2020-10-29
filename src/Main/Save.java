@@ -69,7 +69,7 @@ public class Save implements java.io.Serializable {
 
     public void serializeState() {
         try {
-            FileOutputStream fileOut = new FileOutputStream("C://Users//Poehn//Desktop//test.ser");
+            FileOutputStream fileOut = new FileOutputStream("Resorces//save.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(savedPlayer);
             out.flush();
@@ -83,7 +83,7 @@ public class Save implements java.io.Serializable {
 
     public void deserializeState() {
         try {
-            FileInputStream fileIn = new FileInputStream("C://Users//Poehn//Desktop//test.ser");
+            FileInputStream fileIn = new FileInputStream("Resorces//save.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             savedPlayer = (SavedPlayer) in.readObject();
             in.close();
